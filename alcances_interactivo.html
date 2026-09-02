@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Alcances de Producción — Orbidi</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --purple: #6B21E8;
+    --purple-dark: #4C169E;
+    --purple-tint: #F1EBFC;
+    --black: #111318;
+    --green: #16A34A;
+    --green-tint: #E7F8ED;
+    --red: #D6293E;
+    --red-tint: #FDEBEC;
+    --gray-text: #5B5F6B;
+    --border: #E7E4F0;
+    --web: #F0B429;
+    --ecom: #2E8FD6;
+    --rrss: #6B21E8;
+    --seo: #1E8F5F;
+    --webecom: #7C8590;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#EDEAF6;
+    font-family:'Inter',Arial,sans-serif;
+    padding:28px 0 60px 0;
+  }
+
+  .wrap{
+    width:1280px;
+    margin:0 auto;
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 8px 30px rgba(76,22,158,0.12);
+    padding:36px 44px 32px 44px;
+  }
+
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    color:var(--purple);
+    letter-spacing:0.02em;
+    margin-bottom:6px;
+  }
+  .headline{
+    font-family:'Poppins',Arial,sans-serif;
+    font-weight:800;
+    font-size:30px;
+    color:var(--black);
+    margin:0 0 4px 0;
+  }
+  .headline span{color:var(--purple);}
+  .subtitle{font-size:14px;color:var(--gray-text);margin:0 0 22px 0;}
+
+  /* Main section tabs */
+  .main-tabs{
+    display:flex;
+    gap:8px;
+    border-bottom:2px solid var(--border);
+    margin-bottom:20px;
+  }
+  .main-tab{
+    padding:12px 20px;
+    font-weight:700;
+    font-size:14px;
+    color:var(--gray-text);
+    cursor:pointer;
+    border-bottom:3px solid transparent;
+    user-select:none;
+  }
+  .main-tab.active{
+    color:var(--purple);
+    border-bottom:3px solid var(--purple);
+  }
+
+  .section{display:none;}
+  .section.active{display:block;}
+
+  /* Sub tabs (product buttons) */
+  .sub-tabs{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+  .sub-tab{
+    padding:9px 18px;
+    border-radius:20px;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:0.02em;
+    cursor:pointer;
+    border:none;
+    transition:background .15s ease, color .15s ease;
+  }
+  .sub-tab.st-webecom{background:linear-gradient(90deg, #F3E3B0, #BBD9EC); color:#5C5236;}
+  .sub-tab.st-rrss{background:#DCCEF6; color:#4C169E;}
+  .sub-tab.st-seo{background:#C3E7D3; color:#1E6B48;}
+  .sub-tab.st-all{background:#E4E4E9; color:#4A4C55;}
+  .sub-tab.st-web{background:#F6E6B4; color:#7A5E12;}
+  .sub-tab.st-ecom{background:#C7E0F3; color:#1D5A8A;}
+  .sub-tab.st-gmb{background:#CDEAE0; color:#0F6B52;}
+
+  .sub-tab.active{
+    background:var(--purple) !important;
+    color:#fff !important;
+  }
+
+  .subpanel{display:none;}
+  .subpanel.active{display:block;}
+
+  /* Filter bar */
+  .filter-bar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .filter-bar input{
+    flex:1;
+    padding:10px 14px;
+    border:1.5px solid var(--border);
+    border-radius:8px;
+    font-size:13.5px;
+    font-family:'Inter',sans-serif;
+    outline:none;
+  }
+  .filter-bar input:focus{border-color:var(--purple);}
+  .filter-count{font-size:12px;color:var(--gray-text); white-space:nowrap;}
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13.3px;
+  }
+  thead th{
+    text-align:left;
+    padding:12px 16px;
+    font-weight:700;
+    font-size:12.3px;
+    color:#fff;
+  }
+  .t-scope thead th:nth-child(1){background:var(--purple-dark); border-radius:8px 0 0 0; width:9%;}
+  .t-scope thead th:nth-child(2){background:var(--purple-dark); width:11%;}
+  .t-scope thead th:nth-child(3){background:var(--green); width:40%;}
+  .t-scope thead th:nth-child(4){background:var(--red); border-radius:0 8px 0 0; width:40%;}
+
+  .t-fbk thead th:nth-child(1){background:var(--purple-dark); border-radius:8px 0 0 0; width:9%;}
+  .t-fbk thead th:nth-child(2){background:var(--purple-dark); width:16%;}
+  .t-fbk thead th:nth-child(3){background:var(--green); width:38%;}
+  .t-fbk thead th:nth-child(4){background:var(--black); border-radius:0 8px 0 0; width:37%;}
+
+  tbody tr{border-bottom:1px solid var(--border);}
+  tbody tr:nth-child(even){background:#FBFAFD;}
+  tbody tr.hidden-row{display:none;}
+  tbody td{padding:10px 16px; vertical-align:top; color:var(--black); line-height:1.45;}
+  td.in{color:#1B7A44; background:var(--green-tint);}
+  td.out{color:#A11C2C; background:var(--red-tint);}
+  td.why{color:#3A3D46; background:#F7F6FB;}
+  td.tema{font-weight:600;}
+
+  td.out ul{margin:0; padding-left:16px;}
+  td.out ul li{margin-bottom:3px;}
+
+  .badge{
+    display:inline-block;
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+    color:#fff;
+  }
+  .b-web{background:var(--web); color:#4A3200;}
+  .b-ecom{background:var(--ecom);}
+  .b-rrss{background:var(--rrss);}
+  .b-seo{background:var(--seo);}
+  .b-webecom{background:var(--webecom);}
+  .b-gmb{background:#0F9D6C;}
+
+  .empty-state{
+    padding:70px 20px;
+    text-align:center;
+    color:var(--gray-text);
+  }
+  .empty-state .icon{
+    width:52px;height:52px;border-radius:50%;
+    background:var(--purple-tint);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 16px auto;
+    font-size:22px;color:var(--purple);
+  }
+  .empty-state h3{font-family:'Poppins',sans-serif;color:var(--black); margin:0 0 6px 0; font-size:17px;}
+  .empty-state p{margin:0; font-size:13.5px;}
+
+  .footer{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-top:26px;font-size:11px;color:#9A9AA5;
+  }
+  .footer b{color:var(--purple);font-weight:800;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">PRODUCCIÓN · KIT DIGITAL</div>
+  <h1 class="headline">Alcances <span>&amp; Guías Operativas</span></h1>
+  <p class="subtitle">Referencia única para equipos: qué incluye cada producto y cómo gestionar el feedback del cliente</p>
+
+  <div class="main-tabs">
+    <div class="main-tab active" data-main="kd">ALCANCE DEL KD</div>
+    <div class="main-tab" data-main="revenue">ALCANCE REVENUE</div>
+    <div class="main-tab" data-main="fbk">ABC CS PARA GESTIÓN DE FBK</div>
+  </div>
+
+  <!-- SECTION 1: ALCANCE DEL KD -->
+  <div class="section active" id="section-kd">
+    <div class="sub-tabs">
+      <button class="sub-tab st-webecom active" data-sub="webecom">WEB · ECOM</button>
+      <button class="sub-tab st-rrss" data-sub="rrss">RRSS</button>
+      <button class="sub-tab st-seo" data-sub="seo">SEO</button>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" id="filter-kd" placeholder="Filtrar por tema, palabra clave...">
+      <span class="filter-count" id="count-kd"></span>
+    </div>
+
+    <!-- WEB/ECOM -->
+    <div class="subpanel active" id="panel-webecom">
+      <table class="t-scope" id="table-webecom">
+        <thead><tr><th>Producto</th><th>Tema</th><th>Dentro del alcance</th><th>Fuera del alcance</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Dominio y hosting</td>
+            <td class="in">Incluimos 1 dominio (≤ 16€) y hosting durante el Kit Digital. Si el cliente ya tiene dominio, podemos mantenerlo o migrarlo.</td>
+            <td class="out">No cambiamos el dominio principal tras la memoria ni registramos dominios que infrinjan marcas. No hay enmascaramientos.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Diseño web</td>
+            <td class="in">Diseñamos una web en WordPress responsive, de 3 páginas internas (máx 10).</td>
+            <td class="out">No desarrollamos en Shopify, Wix, otros CMS o código a medida. Scripts/HTML del cliente no generan cambios.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Logo</td>
+            <td class="in">Creamos o modernizamos 1 logo estático si el cliente lo solicita.</td>
+            <td class="out">No realizamos múltiples propuestas ni logos adicionales ni logos animados.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Idiomas</td>
+            <td class="in">La web debe estar en español y un idioma adicional mediante GTranslate.</td>
+            <td class="out">No creamos sitios cuyo idioma principal no sea español ni traducciones manuales.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Funcionalidades</td>
+            <td class="in">Integramos formularios, Google Maps, enlaces a RRSS, áreas privadas y sistemas de reserva compatibles con WordPress.</td>
+            <td class="out">No desarrollamos a medida ni integraciones vía API (Booking, Airbnb, ERP, CRM) ni áreas E-learning.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Animaciones</td>
+            <td class="in">Solo animaciones básicas (movimientos laterales, verticales, desplazamiento diagonal).</td>
+            <td class="out">No hacemos animaciones personalizadas.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">SEO</td>
+            <td class="in">Configuramos SEO básico para facilitar la indexación en Google.</td>
+            <td class="out">No incluye posicionamiento SEO avanzado ni campañas de marketing.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Accesos</td>
+            <td class="in">Entregamos una web autogestionable al finalizar el proyecto.</td>
+            <td class="out">No compartimos accesos antes del cobro de la Memoria 2.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Solicitud de ajustes</td>
+            <td class="in">Hasta 3 rondas de FBK: texto, imagen, secciones, productos, catálogos, datos básicos.</td>
+            <td class="out">No hacemos cambios sugeridos por evaluación de la IA. Deben canalizarse por Markup.</td></tr>
+          <tr><td><span class="badge b-ecom">ECOM</span></td><td class="tema">Tienda online</td>
+            <td class="in">Configuramos WooCommerce para que la tienda pueda vender en línea.</td>
+            <td class="out">No desarrollamos ecommerce en plataformas diferentes a WordPress/WooCommerce.</td></tr>
+          <tr><td><span class="badge b-ecom">ECOM</span></td><td class="tema">Productos</td>
+            <td class="in">Incluimos carga masiva de hasta 100 productos si el cliente completa la matriz (One shot).</td>
+            <td class="out">No realizamos actualizaciones constantes del catálogo.</td></tr>
+          <tr><td><span class="badge b-ecom">ECOM</span></td><td class="tema">Métodos de pago</td>
+            <td class="in">Configuramos las pasarelas de pago que el cliente tenga contratadas (Stripe, PayPal, Redsys, Bizum, etc.).</td>
+            <td class="out">No gestionamos la contratación de pasarelas ni creamos cuentas en estas plataformas.</td></tr>
+          <tr><td><span class="badge b-ecom">ECOM</span></td><td class="tema">Funcionalidades</td>
+            <td class="in">Configuramos las funcionalidades estándar de WooCommerce necesarias para operar la tienda.</td>
+            <td class="out">No desarrollamos plugins personalizados ni funcionalidades a medida. No se instalan plugins de pago.</td></tr>
+          <tr><td><span class="badge b-webecom">WEB/ECOM</span></td><td class="tema">Contenido masivo</td>
+            <td class="in">Carga masiva de hasta 100 elementos (propiedades, noticias, blogs, artículos u otros). One shot.</td>
+            <td class="out">No realizamos cargas superiores al alcance ni actualizaciones continuas de contenido.</td></tr>
+          <tr><td><span class="badge b-webecom">WEB/ECOM</span></td><td class="tema">Buscador de propiedades</td>
+            <td class="in">Para proyectos inmobiliarios, configuramos hasta 3 filtros: ubicación, tipo de inmueble y rango de precio.</td>
+            <td class="out">No desarrollamos filtros personalizados ni buscadores con criterios adicionales.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RRSS -->
+    <div class="subpanel" id="panel-rrss">
+      <table class="t-scope" id="table-rrss">
+        <thead><tr><th>Producto</th><th>Tema</th><th>Dentro del alcance</th><th>Fuera del alcance</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Redes sociales</td>
+            <td class="in">Gestionamos 1 red social: Meta (Facebook + Instagram vinculados) o LinkedIn.</td>
+            <td class="out">No gestionamos TikTok, Pinterest ni YouTube.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Publicaciones</td>
+            <td class="in">Creamos y programamos 52 publicaciones al año (1 por semana).</td>
+            <td class="out">No realizamos publicaciones adicionales dentro del Kit Digital.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Contenido</td>
+            <td class="in">Cada publicación incluye diseño, palabras clave, texto y llamada a la acción.</td>
+            <td class="out">No creamos Reels, Stories, Videos ni Historias Destacadas.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Logo</td>
+            <td class="in">Podemos crear o modernizar 1 logo si el cliente lo requiere.</td>
+            <td class="out">No se hacen logos adicionales.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Perfil</td>
+            <td class="in">Optimizamos la información del perfil (bio, datos de contacto y web).</td>
+            <td class="out">No creamos cuentas de redes sociales. El cliente debe ser el propietario y compartir accesos.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Idiomas</td>
+            <td class="in">Publicamos en español y 1 idioma adicional (inglés o catalán). Otros idiomas requieren traducción del cliente.</td>
+            <td class="out">Publicaciones en más de 2 idiomas.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Monitorización/KPIs</td>
+            <td class="in">Monitoreamos el rendimiento mediante Metricool.</td>
+            <td class="out">No se realizan análisis ni entrega de KPIs más allá del informe de Metricool.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Fechas especiales</td>
+            <td class="in">Las publicaciones se programan según la estrategia entregada por producción. One shot.</td>
+            <td class="out">No se publica en fechas específicas (San Valentín, Navidad, Black Friday) fuera del requerimiento inicial. No se hace on demand.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Servicios adicionales</td>
+            <td class="in">Ninguno</td>
+            <td class="out">No se incluye Community Management, Reels, Stories, Google Business, más publicaciones o Planificación Advance.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Línea de negocio</td>
+            <td class="in">Se genera y crea contenido solo para un tipo o línea de negocio del cliente. One Shot.</td>
+            <td class="out">No se permite rediseñar todo el contenido y la estrategia cuando hay cambio del objeto de negocio del cliente (ej: antes panadería, ahora salón de belleza).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SEO -->
+    <div class="subpanel" id="panel-seo">
+      <table class="t-scope" id="table-seo">
+        <thead><tr><th>Producto</th><th>Tema</th><th>Dentro del alcance</th><th>Fuera del alcance</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge b-seo">SEO</span></td><td class="tema">SEO On Page</td>
+            <td class="in">Optimización SEO On Page hasta en 5 URLs del sitio web del cliente, en 1 solo idioma principal de la página.</td>
+            <td class="out"><ul><li>2 o más idiomas</li><li>Idioma no editable</li><li>Plantilla web (Lorem Ipsum)</li><li>SEO en imágenes</li></ul></td></tr>
+          <tr><td><span class="badge b-seo">SEO</span></td><td class="tema">SEO Off Page</td>
+            <td class="in">SEO Off Page en 3 portales de noticias y 5 directorios ya definidos.</td>
+            <td class="out">Publicación Off Page en portales o directorios exigidos por el cliente. Ya tenemos definidos nuestros partners.</td></tr>
+          <tr><td><span class="badge b-seo">SEO</span></td><td class="tema">SEO Técnico</td>
+            <td class="in">Implementación del SEO On Page y ajustes técnicos del sitio relacionados con velocidad de carga y errores técnicos SEO.</td>
+            <td class="out"><ul>
+              <li>Eliminar virus del sitio</li>
+              <li>Nuevas funcionalidades/páginas/plantillas o contenido distinto al solicitado</li>
+              <li>Ajuste a formularios o servicios</li>
+              <li>Creación de página blog</li>
+              <li>Actualización de sitios obsoletos (PHP &lt; 8.0)</li>
+              <li>SEO Técnico en CMS distintos a WordPress</li>
+              <li>Rediseño del sitio o secciones</li>
+              <li>Instalación de plugins exigidos por el cliente</li>
+              <li>Ajuste a funcionalidades no abordadas durante la implementación</li>
+            </ul></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      <span>ALCANCES DE PRODUCCIÓN 2026</span>
+      <span><b>ØRBIDI</b></span>
+    </div>
+  </div>
+
+  <!-- SECTION 2: ABC CS FBK -->
+  <div class="section" id="section-fbk">
+    <div class="sub-tabs" id="fbk-filters">
+      <button class="sub-tab st-all active" data-fbk="todos">TODOS</button>
+      <button class="sub-tab st-web" data-fbk="WEB">WEB</button>
+      <button class="sub-tab st-ecom" data-fbk="ECOM">ECOM</button>
+      <button class="sub-tab st-rrss" data-fbk="RRSS">RRSS</button>
+      <button class="sub-tab st-seo" data-fbk="SEO">SEO</button>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" id="filter-fbk" placeholder="Filtrar por proceso, pregunta clave...">
+      <span class="filter-count" id="count-fbk"></span>
+    </div>
+
+    <table class="t-fbk" id="table-fbk">
+      <thead><tr><th>Producto</th><th>Proceso</th><th>Preguntas clave para el cliente</th><th>¿Por qué es importante?</th></tr></thead>
+      <tbody>
+        <tr data-prod="WEB"><td><span class="badge b-web">WEB</span></td><td class="tema">Rediseño</td>
+          <td>¿Qué contenido deseas conservar de tu web actual y qué se puede eliminar?</td>
+          <td class="why">Evita rehacer una web completa cuando el cliente solo quiere modernizarla.</td></tr>
+        <tr data-prod="WEB"><td><span class="badge b-web">WEB</span></td><td class="tema">Migración</td>
+          <td>¿Deseas conservar tu dominio actual o cambiar a uno nuevo? Si deseas conservarlo, ¿tienes acceso al proveedor del dominio?</td>
+          <td class="why">Define el flujo técnico desde el inicio.</td></tr>
+        <tr data-prod="WEB"><td><span class="badge b-web">WEB</span></td><td class="tema">Ajustes de texto / imágenes</td>
+          <td>¿Nos proporcionarás el contenido definitivo o prefieres que generemos la propuesta con IA e imágenes de stock?</td>
+          <td class="why">Evita bloqueos por falta de contenido.</td></tr>
+        <tr data-prod="ECOM"><td><span class="badge b-ecom">ECOM</span></td><td class="tema">Creación de productos</td>
+          <td>¿Ya cuentas con las fotografías, precios y descripciones de los productos?</td>
+          <td class="why">Una carga con información no validada puede provocar ventas con precios incorrectos, productos sin stock y retrabajos posteriores.</td></tr>
+        <tr data-prod="ECOM"><td><span class="badge b-ecom">ECOM</span></td><td class="tema">Configuración de métodos de pago</td>
+          <td>¿Cómo recibes actualmente los pagos de tu negocio? ¿Utilizas Stripe, PayPal, Redsys, Bizum, TPV u otra plataforma? Si ya cuentas con alguno de estos métodos, necesitaremos los accesos para configurarlo en tu tienda.</td>
+          <td class="why">Evita bloqueos en la configuración y asegura que la tienda quede operativa para recibir compras.</td></tr>
+        <tr data-prod="RRSS"><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Rediseño</td>
+          <td>¿La estrategia está alineada a tu negocio o qué deseas cambiar? ¿Hay referencias de diseños o cuentas que te gusten?</td>
+          <td class="why">Permite que producción entienda la expectativa del cliente y evite propuestas que no respondan a su necesidad.</td></tr>
+        <tr data-prod="RRSS"><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Vinculación a Metricool</td>
+          <td>¿La cuenta a vincular es la misma con la que hemos estado trabajando o vamos a vincular otra?</td>
+          <td class="why">Evita conectar perfiles incorrectos y garantiza la continuidad del historial y la programación.</td></tr>
+        <tr data-prod="RRSS"><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Contenido propio / genérico</td>
+          <td>¿Deseas que las imágenes que aparezcan en los post sean propias o de stock? En caso de elegir las propias, subirlas al drive y asegurarse que tengan buena calidad. ¿Hay temas específicos que deseas que se aborden en los textos de las publicaciones?</td>
+          <td class="why">Evita retrasos y garantiza que el material sea apto para diseño y publicación. Permite que el contenido responda a los objetivos e intereses del cliente y evita cambios posteriores.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Ajustes a la estrategia</td>
+          <td>¿Cuál es el principal objetivo que quieres conseguir con el SEO?</td>
+          <td class="why">Nos ayuda a entender qué espera conseguir con la estrategia y a priorizar los esfuerzos.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Ajustes a la estrategia</td>
+          <td>¿En qué ciudades, provincias o zonas quieres aparecer en Google?</td>
+          <td class="why">El posicionamiento local depende del área de servicio.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Ajustes a la estrategia</td>
+          <td>¿Qué palabras o frases te gustaría que utilizaran para encontrarte?</td>
+          <td class="why">Ayuda a conocer cómo el cliente entiende su negocio, aunque no todas se incluirán en la estrategia; dependerá del análisis posterior.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Ajustes a la estrategia</td>
+          <td>¿Hay mensajes o términos que prefieras evitar en la comunicación?</td>
+          <td class="why">Garantiza coherencia con la identidad de la marca.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Ajustes a la estrategia</td>
+          <td>¿Quiénes consideras que son tus principales competidores? Comparte los enlaces a sus webs; analizaremos si realmente compiten contigo en buscadores antes de incorporarlos a la estrategia.</td>
+          <td class="why">El cliente conoce muy bien su mercado.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Ajustes a la estrategia</td>
+          <td>¿Sabías que los contenidos que apruebes como parte de la estrategia SEO serán implementados por nuestro equipo directamente en tu sitio web?</td>
+          <td class="why">Asegura que el cliente conoce cómo funciona nuestro proceso y que aprobar contenidos implica su posterior publicación en la web.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Ajustes a la estrategia</td>
+          <td>¿Podrás reunir y enviarnos todos los comentarios o ajustes sobre los contenidos en una única solicitud?</td>
+          <td class="why">Busca centralizar las observaciones para hacer el proceso de revisión más ágil y evitar múltiples ciclos de cambios que retrasen el proyecto.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Ajustes a la estrategia</td>
+          <td>Una vez realicemos los cambios solicitados, ¿podemos avanzar directamente con la implementación?</td>
+          <td class="why">Necesitamos conocer tu preferencia sobre el flujo de aprobación para coordinar correctamente la implementación y evitar retrasos por falta de confirmación.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Implementación</td>
+          <td>¿Puedes facilitarnos acceso de administrador a tu sitio web para realizar las implementaciones SEO? Si tu sitio está en WordPress, además de los nuevos textos, instalaremos plugins para optimizar el sitio.</td>
+          <td class="why">Necesitamos los permisos adecuados para implementar las optimizaciones de forma segura y eficiente. En WordPress usamos plugins profesionales con licencia; en otros CMS, el alcance depende de las funcionalidades de la plataforma.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Implementación</td>
+          <td>¿El acceso al panel de administración de tu sitio web cuenta con autenticación de dos factores (doble verificación)?</td>
+          <td class="why">Necesitamos saber si el acceso está protegido con un segundo factor para coordinar el ingreso y evitar retrasos durante las implementaciones.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Implementación</td>
+          <td>Si tu sitio está en WordPress, ¿nos autorizas a instalar los plugins profesionales licenciados que utilizamos (optimización de imágenes, SEO y caché) y a desactivar plugins gratuitos con funciones duplicadas? ¿Hay algún plugin actual que prefieras mantener sin modificar?</td>
+          <td class="why">Necesitamos saber si hay herramientas instaladas que puedan generar conflictos o duplicidad de funciones, o configuraciones que deban conservarse.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Implementación</td>
+          <td>¿Tu sitio web cuenta actualmente con un sistema de copias de seguridad y espacio disponible suficiente para crear un respaldo completo antes de realizar las implementaciones?</td>
+          <td class="why">Necesitamos garantizar un punto de recuperación del sitio antes de cualquier cambio técnico. Si ya existe un sistema de backups lo usaremos; si no, instalaremos uno adecuado.</td></tr>
+        <tr data-prod="SEO"><td><span class="badge b-seo">SEO</span></td><td class="tema">Implementación</td>
+          <td>Publicaremos los datos básicos del negocio (nombre comercial, dirección, código postal, enlace al sitio web) en directorios empresariales como parte de la estrategia de visibilidad. Estos datos son requeridos para el Kit Digital y no podrán ocultarse durante la prestación del servicio.</td>
+          <td class="why">Necesitamos confirmar que el cliente está de acuerdo con la publicación de esta información, requerida para la justificación del servicio del Kit Digital.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="footer">
+      <span>ABC CS PARA GESTIÓN DE FBK</span>
+      <span><b>ØRBIDI</b></span>
+    </div>
+  </div>
+
+  <!-- SECTION 3: ALCANCE REVENUE -->
+  <div class="section" id="section-revenue">
+    <div class="sub-tabs">
+      <button class="sub-tab st-webecom active" data-subrev="webecom">WEB · ECOM</button>
+      <button class="sub-tab st-rrss" data-subrev="rrss">RRSS</button>
+      <button class="sub-tab st-seo" data-subrev="seo">SEO</button>
+      <button class="sub-tab st-gmb" data-subrev="gmb">GMB</button>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" id="filter-revenue" placeholder="Filtrar por tema, palabra clave...">
+      <span class="filter-count" id="count-revenue"></span>
+    </div>
+
+    <!-- REVENUE: WEB/ECOM -->
+    <div class="subpanel active" id="panelrev-webecom">
+      <table class="t-scope" id="table-rev-webecom">
+        <thead><tr><th>Producto</th><th>Tema</th><th>Dentro del alcance</th><th>Fuera del alcance</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Dominio y hosting</td>
+            <td class="in">Incluimos 1 dominio (≤ 16€) y hosting durante el Kit Digital. Si el cliente ya tiene dominio, podemos mantenerlo y migrarlo.</td>
+            <td class="out">No cambiamos el dominio principal después de presentar la memoria ni registramos dominios que infrinjan marcas. No hay enmascaramientos.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Diseño web</td>
+            <td class="in">Diseñamos una web en WordPress responsive, de 3 páginas internas (máx 10).</td>
+            <td class="out">No desarrollamos webs en Shopify, Wix, otros CMS o código a medida. Si el cliente envía scripts o HTML para rediseño web, no se generan cambios.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Logo</td>
+            <td class="in">Creamos o modernizamos 1 logo estático si el cliente lo solicita.</td>
+            <td class="out">No realizamos múltiples propuestas ni logos adicionales dentro del servicio ni logos animados.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Idiomas</td>
+            <td class="in">La web debe estar en español y un idioma adicional mediante GTranslate.</td>
+            <td class="out">No creamos sitios cuyo idioma principal no sea español ni realizamos traducciones manuales.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Funcionalidades</td>
+            <td class="in">Podemos integrar formularios, Google Maps, enlaces a RRSS, áreas privadas y sistemas de reserva compatibles con WordPress.</td>
+            <td class="out">No desarrollamos funcionalidades a medida ni integraciones mediante API (Booking, Airbnb, ERP, CRM, etc.) ni áreas privadas con contenido E-learning.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Animaciones</td>
+            <td class="in">Solo hacemos animaciones básicas (movimientos laterales, verticales, desplazamiento diagonal).</td>
+            <td class="out">No hacemos animaciones personalizadas.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">SEO</td>
+            <td class="in">Configuramos SEO básico para facilitar la indexación en Google.</td>
+            <td class="out">No incluye posicionamiento SEO avanzado ni campañas de marketing.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Accesos</td>
+            <td class="in">Entregamos una web autogestionable al finalizar el proyecto.</td>
+            <td class="out">No compartimos accesos antes del cobro de la Memoria 2.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Antivirus</td>
+            <td class="in">Ninguno</td>
+            <td class="out">Instalación de antivirus o soluciones de virus.</td></tr>
+          <tr><td><span class="badge b-web">WEB</span></td><td class="tema">Solicitud de ajustes</td>
+            <td class="in">Hasta 3 rondas de FBK de ajustes de texto, imagen, agregar o eliminar secciones, actualizar productos, servicios, catálogos, datos básicos.</td>
+            <td class="out">No hacemos cambios (feedbacks) sugeridos por evaluación de la IA. Deben canalizarse por Markup.</td></tr>
+          <tr><td><span class="badge b-ecom">ECOM</span></td><td class="tema">Tienda online</td>
+            <td class="in">Configuramos WooCommerce para que la tienda pueda vender en línea.</td>
+            <td class="out">No desarrollamos ecommerce en plataformas diferentes a WordPress/WooCommerce.</td></tr>
+          <tr><td><span class="badge b-ecom">ECOM</span></td><td class="tema">Productos</td>
+            <td class="in">Incluimos la carga masiva de hasta 100 productos si el cliente completa la matriz (One shot).</td>
+            <td class="out">No realizamos actualizaciones constantes del catálogo.</td></tr>
+          <tr><td><span class="badge b-ecom">ECOM</span></td><td class="tema">Métodos de pago</td>
+            <td class="in">Configuramos las pasarelas de pago que el cliente tenga contratadas (Stripe, PayPal, Redsys, Bizum, etc.).</td>
+            <td class="out">No gestionamos la contratación de las pasarelas ni creamos cuentas en estas plataformas.</td></tr>
+          <tr><td><span class="badge b-ecom">ECOM</span></td><td class="tema">Funcionalidades</td>
+            <td class="in">Configuramos las funcionalidades estándar de WooCommerce necesarias para operar la tienda.</td>
+            <td class="out">No desarrollamos plugins personalizados ni funcionalidades a medida. No se instalan plugins de pago.</td></tr>
+          <tr><td><span class="badge b-webecom">WEB/ECOM</span></td><td class="tema">Contenido masivo</td>
+            <td class="in">Podemos realizar la carga masiva de hasta 100 elementos (propiedades, noticias, blogs, artículos u otros contenidos). One shot.</td>
+            <td class="out">No realizamos cargas masivas superiores al alcance ni actualizaciones continuas del contenido.</td></tr>
+          <tr><td><span class="badge b-webecom">WEB/ECOM</span></td><td class="tema">Buscador de propiedades</td>
+            <td class="in">Para proyectos inmobiliarios configuramos hasta 3 filtros de búsqueda: ubicación, tipo de inmueble y rango de precio.</td>
+            <td class="out">No desarrollamos filtros personalizados ni buscadores con criterios adicionales fuera de estos tres.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- REVENUE: RRSS -->
+    <div class="subpanel" id="panelrev-rrss">
+      <table class="t-scope" id="table-rev-rrss">
+        <thead><tr><th>Producto</th><th>Tema</th><th>Dentro del alcance</th><th>Fuera del alcance</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Redes sociales</td>
+            <td class="in">Gestionamos 1 red social: Meta (Facebook + Instagram vinculados) o LinkedIn.</td>
+            <td class="out">No gestionamos TikTok, Pinterest ni YouTube.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Publicaciones</td>
+            <td class="in">Creamos y programamos 6 publicaciones al mes + 2 stories (para Instagram); 8 publicaciones al mes (para LinkedIn).</td>
+            <td class="out">No realizamos publicaciones adicionales dentro del Revenue.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Contenido</td>
+            <td class="in">Cada publicación incluye diseño, palabras clave, texto y llamada a la acción. Se realiza solo 1 ronda de feedback.</td>
+            <td class="out">No creamos Reels, Videos ni Historias Destacadas. No se hace más de una ronda de feedback.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Logo</td>
+            <td class="in">Podemos crear o modernizar 1 logo si el cliente lo requiere.</td>
+            <td class="out">No se hacen logos adicionales.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Perfil</td>
+            <td class="in">N/A</td>
+            <td class="out">No creamos cuentas de redes sociales, ni optimizamos el perfil. El cliente debe ser el propietario y compartir los accesos.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Idiomas</td>
+            <td class="in">Publicamos en español.</td>
+            <td class="out">Publicaciones en más de 1 idioma.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Monitorización/KPIs</td>
+            <td class="in">Monitoreamos el rendimiento mediante Metricool.</td>
+            <td class="out">No se realizan análisis ni entrega de KPIs, más allá del informe de Metricool.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Fechas especiales</td>
+            <td class="in">Las publicaciones se programan según la estrategia entregada por producción. One shot.</td>
+            <td class="out">No se publica en fechas específicas (San Valentín, Navidad, Black Friday, etc.) que no estén dentro del requerimiento inicial. No se hace on demand.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Servicios adicionales</td>
+            <td class="in">Ninguno</td>
+            <td class="out">No se incluyen Community Management, Reels, Google Business, más publicaciones o Planificación Advance dentro del producto.</td></tr>
+          <tr><td><span class="badge b-rrss">RRSS</span></td><td class="tema">Línea de negocio</td>
+            <td class="in">Se genera y crea contenido solo para un tipo o línea de negocio del cliente. One Shot por mes.</td>
+            <td class="out">No se permite rediseñar todo el contenido generado y la estrategia cuando hay cambio del objeto de negocio del cliente (ej: antes panadería, ahora salón de belleza). No se reprocesa el contenido generado en meses anteriores.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- REVENUE: SEO -->
+    <div class="subpanel" id="panelrev-seo">
+      <table class="t-scope" id="table-rev-seo">
+        <thead><tr><th>Producto</th><th>Tema</th><th>Dentro del alcance</th><th>Fuera del alcance</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge b-seo">SEO</span></td><td class="tema">SEO On Page</td>
+            <td class="in">1 landing optimizada al mes.</td>
+            <td class="out"><ul><li>2 o más idiomas</li><li>Idioma no editable</li><li>Plantilla web (Lorem Ipsum)</li><li>SEO en imágenes</li></ul></td></tr>
+          <tr><td><span class="badge b-seo">SEO</span></td><td class="tema">SEO técnico</td>
+            <td class="in">SEO técnico ligero y mantenimiento.</td>
+            <td class="out"><ul>
+              <li>Eliminar virus del sitio</li>
+              <li>Crear nuevas funcionalidades, páginas, plantillas o contenido distinto al solicitado por el SEO On Page</li>
+              <li>Ajuste a formularios o servicios del sitio web</li>
+              <li>Creación de página blog</li>
+              <li>Actualización de sitios obsoletos (versiones inferiores a PHP 8.0)</li>
+              <li>SEO Técnico en CMS distintos a WordPress. Avanzamos según la limitación del constructor</li>
+              <li>Rediseño del sitio o secciones</li>
+              <li>Instalación de plugins exigidos por el cliente</li>
+              <li>Ajuste a funcionalidades que no se abordaron durante la implementación</li>
+            </ul></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- REVENUE: GMB -->
+    <div class="subpanel" id="panelrev-gmb">
+      <table class="t-scope" id="table-rev-gmb">
+        <thead><tr><th>Producto</th><th>Tema</th><th>Dentro del alcance</th><th>Fuera del alcance</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge b-gmb">GMB</span></td><td class="tema">Requisitos</td>
+            <td class="in">Para contratar se necesita: perfil de Google My Business activo y verificado, acceso de administrador o propietario, e información actualizada del negocio (descripción, categorías, servicios, fotos, teléfono, dirección exacta, horarios completos, URL de la web, zona de servicio y atributos del negocio).</td>
+            <td class="out">No nos inventamos información, ni buscamos información que no sea proporcionada por el cliente.</td></tr>
+          <tr><td><span class="badge b-gmb">GMB</span></td><td class="tema">Perfil</td>
+            <td class="in">Auditoría del perfil y optimización de descripción, categorías, servicios, información de contacto y atributos del negocio. Si no tiene descripción, servicios o información, el cliente debe proporcionarla. Se optimiza una única vez.</td>
+            <td class="out"><ul>
+              <li>Investigar qué servicios ofrece</li>
+              <li>Inventar descripciones</li>
+              <li>Adivinar horarios</li>
+              <li>Publicación de posts mensuales</li>
+              <li>Actualización de horarios cuando cambien</li>
+              <li>Subida de fotos nuevas regularmente</li>
+              <li>Respuesta a reseñas</li>
+              <li>Gestión continua</li>
+            </ul></td></tr>
+          <tr><td><span class="badge b-gmb">GMB</span></td><td class="tema">Fotografías</td>
+            <td class="in">Subimos las fotos que el cliente nos proporciona: logo, portada, fachada exterior, interior del local, equipo/personal y productos/servicios en acción.</td>
+            <td class="out"><ul><li>Sesión fotográfica</li><li>Creación de imágenes</li><li>Diseño gráfico</li></ul></td></tr>
+          <tr><td><span class="badge b-gmb">GMB</span></td><td class="tema">SEO Local</td>
+            <td class="in">Actualización de keywords locales importantes, categorización correcta e información completa.</td>
+            <td class="out"><ul><li>Crear perfil nuevo</li><li>Proceso de verificación de Google</li><li>Reclamar perfil existente</li></ul></td></tr>
+          <tr><td><span class="badge b-gmb">GMB</span></td><td class="tema">Informe</td>
+            <td class="in">Se entrega un PDF con antes/después, qué optimizamos y recomendaciones adicionales.</td>
+            <td class="out">No gestionamos reseñas. Solo optimizamos el perfil.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      <span>ALCANCE REVENUE</span>
+      <span><b>ØRBIDI</b></span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Main tab switching
+  document.querySelectorAll('.main-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.main-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('section-'+tab.dataset.main).classList.add('active');
+    });
+  });
+
+  // Sub tab switching (ALCANCE DEL KD)
+  document.querySelectorAll('#section-kd .sub-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('#section-kd .sub-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('#section-kd .subpanel').forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-'+tab.dataset.sub).classList.add('active');
+      document.getElementById('filter-kd').value='';
+      applyKdFilter();
+    });
+  });
+
+  // Filter for ALCANCE DEL KD (filters active subpanel table)
+  function applyKdFilter(){
+    const term = document.getElementById('filter-kd').value.toLowerCase();
+    const activePanel = document.querySelector('#section-kd .subpanel.active');
+    const rows = activePanel.querySelectorAll('tbody tr');
+    let visible = 0;
+    rows.forEach(r=>{
+      const match = r.textContent.toLowerCase().includes(term);
+      r.classList.toggle('hidden-row', !match);
+      if(match) visible++;
+    });
+    document.getElementById('count-kd').textContent = term ? visible+' resultado(s)' : '';
+  }
+  document.getElementById('filter-kd').addEventListener('input', applyKdFilter);
+
+  // Sub tab switching (ALCANCE REVENUE)
+  document.querySelectorAll('#section-revenue .sub-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('#section-revenue .sub-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('#section-revenue .subpanel').forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panelrev-'+tab.dataset.subrev).classList.add('active');
+      document.getElementById('filter-revenue').value='';
+      applyRevenueFilter();
+    });
+  });
+
+  function applyRevenueFilter(){
+    const term = document.getElementById('filter-revenue').value.toLowerCase();
+    const activePanel = document.querySelector('#section-revenue .subpanel.active');
+    const rows = activePanel.querySelectorAll('tbody tr');
+    let visible = 0;
+    rows.forEach(r=>{
+      const match = r.textContent.toLowerCase().includes(term);
+      r.classList.toggle('hidden-row', !match);
+      if(match) visible++;
+    });
+    document.getElementById('count-revenue').textContent = term ? visible+' resultado(s)' : '';
+  }
+  document.getElementById('filter-revenue').addEventListener('input', applyRevenueFilter);
+
+  // Filter + product chips for ABC CS FBK
+  let activeFbkProduct = 'todos';
+  function applyFbkFilter(){
+    const term = document.getElementById('filter-fbk').value.toLowerCase();
+    const rows = document.querySelectorAll('#table-fbk tbody tr');
+    let visible = 0;
+    rows.forEach(r=>{
+      const prodMatch = activeFbkProduct==='todos' || r.dataset.prod===activeFbkProduct;
+      const textMatch = r.textContent.toLowerCase().includes(term);
+      const show = prodMatch && textMatch;
+      r.classList.toggle('hidden-row', !show);
+      if(show) visible++;
+    });
+    document.getElementById('count-fbk').textContent = (term||activeFbkProduct!=='todos') ? visible+' resultado(s)' : '';
+  }
+  document.getElementById('filter-fbk').addEventListener('input', applyFbkFilter);
+  document.querySelectorAll('#fbk-filters .sub-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('#fbk-filters .sub-tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFbkProduct = btn.dataset.fbk;
+      applyFbkFilter();
+    });
+  });
+</script>
+</body>
+</html>
