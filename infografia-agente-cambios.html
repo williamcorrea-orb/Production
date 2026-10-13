@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agente de cambios: eficiencia e impacto en horas-hombre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F6FB;
+    --surface: #FFFFFF;
+    --ink: #1B1530;
+    --muted: #5E5878;
+    --line: #E2DEEE;
+    --agent: #6B21E8;
+    --agent-ink: #FFFFFF;
+    --human: #2A2342;
+    --human-ink: #FFFFFF;
+    --alert: #E4572E;
+    --font: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12101C; --surface: #1C1830; --ink: #F1EEFA; --muted: #A9A3C2; --line: #332D4D;
+      --agent: #8B4DFF; --agent-ink: #FFFFFF; --human: #3B3360; --human-ink: #F1EEFA; --alert: #FF7A55;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12101C; --surface: #1C1830; --ink: #F1EEFA; --muted: #A9A3C2; --line: #332D4D;
+    --agent: #8B4DFF; --agent-ink: #FFFFFF; --human: #3B3360; --human-ink: #F1EEFA; --alert: #FF7A55;
+    color-scheme: dark;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--font); line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 880px; margin: 0 auto; padding: 40px 20px 48px; }
+  h1 {
+    font-size: clamp(28px, 5.2vw, 44px); line-height: 1.08; letter-spacing: -0.02em;
+    margin: 0 0 12px; font-weight: 700; max-width: 26ch;
+  }
+  .lead { color: var(--muted); font-size: clamp(15px, 2.2vw, 18px); margin: 0 0 36px; max-width: 58ch; }
+
+  .row { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px 22px 20px; margin-bottom: 14px; }
+  .row h2 { font-size: 16px; font-weight: 600; margin: 0 0 4px; }
+  .row .sub { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+  .bar { display: flex; height: 64px; border-radius: 10px; overflow: hidden; }
+  .seg { display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: clamp(15px, 3.4vw, 24px); white-space: nowrap; }
+  .seg.agent { background: var(--agent); color: var(--agent-ink); }
+  .seg.human { background: var(--human); color: var(--human-ink); }
+  .caps { display: flex; margin-top: 10px; gap: 12px; font-size: 13.5px; color: var(--muted); }
+  .caps span { display: block; }
+  .caps b { color: var(--ink); font-weight: 600; }
+
+  .link { text-align: center; color: var(--muted); font-size: 22px; line-height: 1; margin: -2px 0 12px; }
+
+  .row.focus { border: 2px solid var(--alert); }
+  .row.focus h2 { color: var(--alert); }
+
+  .takeaway {
+    margin-top: 28px; padding: 22px 24px; border-left: 5px solid var(--agent);
+    background: var(--surface); border-radius: 0 14px 14px 0;
+  }
+  .takeaway p { margin: 0; font-size: clamp(17px, 2.6vw, 21px); font-weight: 600; line-height: 1.35; }
+  .takeaway p + p { margin-top: 8px; font-weight: 400; font-size: clamp(14px, 2vw, 16px); color: var(--muted); }
+  .foot { margin-top: 18px; font-size: 12.5px; color: var(--muted); }
+  @media (max-width: 520px) {
+    main { padding: 28px 14px 36px; }
+    .row { padding: 18px 16px; }
+    .caps { flex-direction: column; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>El agente genera eficiencia, hoy impacta ~25% de las HH de Producción</h1>
+  <p class="lead">Todo lo que el agente de cambios resuelve es eficiencia ganada. El punto es el alcance: hoy impacta una parte acotada de la capacity de producción, y el ~75% restante sigue dependiendo del equipo.</p>
+
+  <section class="row" aria-labelledby="r1">
+    <h2 id="r1">1. Cobertura: proyectos que atiende el agente</h2>
+    <p class="sub">Sobre el 100% de los proyectos</p>
+    <div class="bar" role="img" aria-label="Agente 15 por ciento, humano 85 por ciento">
+      <div class="seg agent" style="width:15%">15%</div>
+      <div class="seg human" style="width:85%">85% pasa a humano</div>
+    </div>
+    <div class="caps"><span style="flex:0 0 15%"><b>Agente</b></span><span><b>Derivado al equipo:</b> el agente no logra atenderlo</span></div>
+  </section>
+
+  <div class="link" aria-hidden="true">↓</div>
+
+  <section class="row" aria-labelledby="r2">
+    <h2 id="r2">2. Resolución: comentarios dentro de los proyectos que atiende</h2>
+    <p class="sub">Sobre las peticiones de cambio de ese 15%</p>
+    <div class="bar" role="img" aria-label="Resuelve 60 a 65 por ciento, no resuelve 35 a 40 por ciento">
+      <div class="seg agent" style="width:62.5%">60-65% resuelto</div>
+      <div class="seg human" style="width:37.5%">35-40% no</div>
+    </div>
+    <div class="caps"><span style="flex:0 0 62.5%"><b>Resuelto por el agente</b></span><span><b>Lo resuelve el equipo</b></span></div>
+  </section>
+
+  <div class="link" aria-hidden="true">↓</div>
+
+  <section class="row focus" aria-labelledby="r3">
+    <h2 id="r3">3. Impacto: horas-hombre de la capacity de producción (aprox.)</h2>
+    <p class="sub">Dónde se concentra la fuerza productiva requerida</p>
+    <div class="bar" role="img" aria-label="Lo que el agente resuelve equivale a 25 por ciento de la capacity, lo que no resuelve a 75 por ciento">
+      <div class="seg agent" style="width:25%">~25%</div>
+      <div class="seg human" style="width:75%">~75% de la capacity</div>
+    </div>
+    <div class="caps"><span style="flex:0 0 25%"><b>Impacto del agente</b></span><span><b>Sin impacto del agente:</b> proyectos derivados + comentarios sin resolver</span></div>
+  </section>
+
+  <div class="takeaway">
+    <p>Lo que el agente resuelve es eficiencia, y hoy impacta ~25% de las horas-hombre. El ~75% restante sigue en lo que no atiende ni resuelve.</p>
+    <p>El 60-65% de comentarios resueltos no equivale al impacto total sobre la capacity.</p>
+  </div>
+  <p class="foot">Cifras aproximadas.</p>
+</main>
+</body>
+</html>
