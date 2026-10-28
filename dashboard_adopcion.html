@@ -1,152 +1,325 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Adopción Tecnológica + IA · Producción</title>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adopción Tech + IA Producción</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+</head><body>
 <style>
-:root{--bg:#F4F6F9;--card:#FFFFFF;--ink:#0B2545;--ink2:#374151;--muted:#6B7280;--line:#E5E7EB;--navy:#0B2545;--navy2:#13315C;
---l1:#FDE2E1;--l2:#FDECCF;--l3:#FFF6C2;--l4:#D9F2DF;--l5:#9FDCB0;--off:#F9FAFB;
---crit:#D64545;--warn:#E8A317;--good:#7DB84A;--strong:#2E9D57;}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1623;--card:#172133;--ink:#E8EEF7;--ink2:#C9D2DF;--muted:#94A3B8;--line:#26324A;--navy:#0B2545;--navy2:#1D3F70;
---l1:#5A2626;--l2:#5A3F1A;--l3:#55501C;--l4:#1F4A2E;--l5:#2C7A47;--off:#1B2638}}
+/* Layout: tablero ejecutivo de una columna — KPIs → herramientas vs meta → top por producto → roles → matriz → plan de cierre */
+:root{
+  --bg:#f5f6f4; --surface:#ffffff; --ink:#14201a; --ink-2:#4b5650; --ink-3:#7d8781; --line:#e1e5e2;
+  --brand:#1f5a43; --brand-soft:#e3efe9; --navy:#1e2f52;
+  --good:#1a7f4b; --good-bg:#e2f3e9; --warn:#a86a00; --warn-bg:#fbf0d9; --crit:#c0392f; --crit-bg:#fbe5e2;
+  --l1:#eef1f6; --l2:#cde2fb; --l3:#86b6ef; --l4:#2a78d6; --l5:#184f95; --l-ink-light:#14201a; --l-ink-dark:#ffffff;
+  --meta:#c0392f;
+  --p-web:#2b6c5a; --p-web-bg:#eef6f2; --p-rrss:#b8541f; --p-rrss-bg:#fcf1ea; --p-seo:#5a48c4; --p-seo-bg:#f1effb;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111613; --surface:#19201c; --ink:#eef2ef; --ink-2:#b9c3bd; --ink-3:#8a958f; --line:#2b3530;
+  --brand:#5cbf8f; --brand-soft:#1d3329; --navy:#9fb4e0;
+  --good:#4cc283; --good-bg:#16301f; --warn:#e0a63a; --warn-bg:#33280f; --crit:#ef7a70; --crit-bg:#3a1c19;
+  --l1:#232b27; --l2:#1c3f6b; --l3:#2a64ad; --l4:#3987e5; --l5:#86b6ef; --l-ink-light:#eef2ef; --l-ink-dark:#0d1a2e; --meta:#ef7a70; --p-web:#5cbf8f; --p-web-bg:#16241d; --p-rrss:#e88b57; --p-rrss-bg:#2a1c13; --p-seo:#9d91ee; --p-seo-bg:#1e1b30; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111613; --surface:#19201c; --ink:#eef2ef; --ink-2:#b9c3bd; --ink-3:#8a958f; --line:#2b3530;
+  --brand:#5cbf8f; --brand-soft:#1d3329; --navy:#9fb4e0;
+  --good:#4cc283; --good-bg:#16301f; --warn:#e0a63a; --warn-bg:#33280f; --crit:#ef7a70; --crit-bg:#3a1c19;
+  --l1:#232b27; --l2:#1c3f6b; --l3:#2a64ad; --l4:#3987e5; --l5:#86b6ef; --l-ink-light:#eef2ef; --l-ink-dark:#0d1a2e; --meta:#ef7a70; --p-web:#5cbf8f; --p-web-bg:#16241d; --p-rrss:#e88b57; --p-rrss-bg:#2a1c13; --p-seo:#9d91ee; --p-seo-bg:#1e1b30; color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink2);font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;font-size:13px}
-.wrap{max-width:1400px;margin:0 auto;padding:20px 16px 40px}
-header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px;margin-bottom:16px}
-h1{margin:0;font-size:22px;color:var(--ink)}
-.sub{color:var(--muted);margin-top:4px}
-.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-select,button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer}
-button.primary{background:var(--navy2);color:#fff;border-color:var(--navy2)}
-.stamp{color:var(--muted);font-size:11px}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
-.k{background:var(--card);border-radius:10px;padding:12px 14px;border-left:4px solid var(--navy2);box-shadow:0 1px 2px rgba(0,0,0,.05)}
-.k b{display:block;font-size:24px;color:var(--ink);line-height:1.2}
-.k span{color:var(--muted);font-size:11px}
-.grid{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;margin-bottom:14px}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
-.card{background:var(--card);border-radius:10px;padding:14px 16px;box-shadow:0 1px 2px rgba(0,0,0,.05);min-width:0}
-.card h2{font-size:14px;margin:0 0 2px;color:var(--ink)}
-.card .hint{color:var(--muted);font-size:11px;margin-bottom:10px}
-.bars .row{display:grid;grid-template-columns:170px 1fr 44px;align-items:center;gap:8px;padding:3px 0;position:relative}
-.bars .lbl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;color:var(--ink2)}
-.bars .lbl small{color:var(--muted)}
-.bars .track{background:var(--off);height:14px;border-radius:0 4px 4px 0;position:relative}
-.bars .fill{height:100%;border-radius:0 4px 4px 0}
-.bars .val{font-weight:700;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
-.bars .goal{position:absolute;top:-3px;bottom:-3px;border-left:2px dashed var(--muted);opacity:.6}
-.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:11px;color:var(--muted)}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
-.dist{display:flex;height:34px;border-radius:6px;overflow:hidden;gap:2px;margin:6px 0 8px}
-.dist div{display:flex;align-items:center;justify-content:center;font-weight:700;color:#1F2937;font-size:12px;min-width:0}
-.tablewrap{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:11px}
-th,td{border:1px solid var(--line);padding:5px 6px;text-align:center;white-space:nowrap}
-thead th{background:var(--navy2);color:#fff;font-weight:600;white-space:normal;min-width:62px}
-thead tr.grp th{background:var(--navy);letter-spacing:.5px}
-thead tr.tool th{background:#E8EDF5;color:var(--navy2)}
-td.n{text-align:left;font-weight:600;color:var(--ink)}td.r{text-align:left;color:var(--muted)}
-td.c1{background:var(--l1)}td.c2{background:var(--l2)}td.c3{background:var(--l3)}td.c4{background:var(--l4)}td.c5{background:var(--l5);font-weight:700}
-td.off{color:#B8BEC7;background:var(--card)}
-td.pct{font-weight:700;color:var(--ink)}
-.chip{display:inline-block;padding:1px 6px;border-radius:10px;font-size:10px;font-weight:600;color:#fff}
-.tip{position:fixed;pointer-events:none;background:#111827;color:#fff;padding:6px 8px;border-radius:6px;font-size:11px;opacity:0;transition:opacity .1s;z-index:9;max-width:260px}
-.err{background:#FDE2E1;color:#7F1D1D;padding:10px 12px;border-radius:8px;margin-bottom:12px;display:none}
-footer{color:var(--muted);font-size:11px;margin-top:14px}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.45}
+.wrap{max-width:1180px;margin:0 auto;padding-block:24px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:.01em}
+h1{font-size:30px;color:var(--brand)}
+h2{font-size:19px;text-transform:uppercase;letter-spacing:.04em}
+h3{font-size:15px}
+.sub{color:var(--ink-2);margin:4px 0 0;max-width:80ch}
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+section{display:flex;flex-direction:column;gap:12px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.kpi b{font-family:var(--f-display);font-size:32px;line-height:1.1}
+.kpi span{color:var(--ink-2);font-size:12.5px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.ok{background:var(--good-bg);color:var(--good)} .pill.lim{background:var(--warn-bg);color:var(--warn)} .pill.gap{background:var(--crit-bg);color:var(--crit)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);text-align:left;font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.prod{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+.bar{position:relative;height:16px;min-width:150px}
+.bar .track{position:absolute;inset:6px 0 6px 0;background:var(--line);border-radius:3px}
+.bar .fill{position:absolute;left:0;top:3px;bottom:3px;border-radius:0 4px 4px 0}
+.bar .metaline{position:absolute;top:0;bottom:0;width:2px;background:var(--meta)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink-2);align-items:center}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.rank{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+.rank li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:center}
+.rank .pos{font-family:var(--f-display);font-weight:700;color:var(--ink-3);text-align:right}
+.rank .who{min-width:0}
+.rank .who small{display:block;color:var(--ink-3);font-size:11.5px}
+.rank .val{font-family:var(--f-mono);font-size:12.5px}
+.rolehead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.rolestats{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px}
+.rolestats div{display:flex;flex-direction:column}
+.rolestats b{font-family:var(--f-display);font-size:22px}
+.rolestats span{font-size:11.5px;color:var(--ink-3)}
+.mini{height:8px;background:var(--line);border-radius:4px;overflow:hidden;width:90px}
+.mini i{display:block;height:100%;background:var(--brand)}
+.hm{border-collapse:separate;border-spacing:0;table-layout:fixed;width:auto}
+.hm td,.hm th{padding:0;border:none}
+.hm col.c{width:44px}
+.hm col.n{width:180px}
+.hm .gSEO:last-child{border-right:2px solid var(--pc)} .hm col.r{width:150px}
+.hm th.tool{height:170px;vertical-align:bottom;padding:0 0 6px;text-align:center}
+.hm th.tool div b{font-weight:700;display:block}
+.hm th.tool div span{display:block;color:var(--ink-2);font-size:10.5px}
+.hm th.tool div{writing-mode:vertical-rl;transform:rotate(180deg);margin:0 auto;font-size:11.5px;font-weight:500;text-transform:none;letter-spacing:0;color:var(--ink);line-height:1.15;max-height:160px;text-align:left}
+.hm th.grp{font-family:var(--f-mono);font-size:11px;font-weight:700;letter-spacing:.08em;text-align:center;padding:5px 0;color:var(--pc);background:var(--pbg);border-top:3px solid var(--pc)}
+.hm th.tool,.hm td.c{background:var(--pbg)}
+.hm .gs{border-left:2px solid var(--pc)}
+.hm td.c{padding:2px 4px;text-align:center}
+.hm td.nm{padding:2px 10px 2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px}
+.hm td.rl{padding:2px 10px 2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px;color:var(--ink-3)}
+.hm th.rh{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);text-align:left;vertical-align:bottom;padding:0 0 8px;font-weight:600}
+.hm tr.rolesep td{padding:10px 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.hm tr.rolesep td.c{background:var(--pbg)}
+.hm .gWEB{--pc:var(--p-web);--pbg:var(--p-web-bg)} .hm .gRRSS{--pc:var(--p-rrss);--pbg:var(--p-rrss-bg)} .hm .gSEO{--pc:var(--p-seo);--pbg:var(--p-seo-bg)}
+.cell{width:36px;height:24px;margin:0 auto;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:11.5px;position:relative;cursor:default}
+.cell.req::after{content:"";position:absolute;right:2px;top:2px;width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.55}
+.cell.na{opacity:.38}
+.cell.zero{border:1px dashed var(--ink-3);font-size:0}.cell.zero::before{content:"–";font-size:12px}
+.plan li{margin-bottom:6px}
+.note{font-size:12.5px;color:var(--ink-2)}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:6px 9px;border-radius:6px;z-index:20;max-width:260px}
+.toggle{display:flex;gap:6px;flex-wrap:wrap}
+.toggle button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);padding:5px 12px;border-radius:999px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--surface)}
+button:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--surface);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.navin{max-width:1180px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.nav a{white-space:nowrap;text-decoration:none;color:var(--ink-2);font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:6px}
+.nav a:hover,.nav a:focus-visible{background:var(--brand-soft);color:var(--brand)}
+html{scroll-behavior:smooth} section{scroll-margin-top:60px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.sechead{display:flex;gap:12px;align-items:flex-start;border-top:2px solid var(--brand);padding-top:12px}
+.sechead .note{margin:3px 0 0}
+.secn{font-family:var(--f-display);font-weight:700;font-size:15px;color:var(--surface);background:var(--brand);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex:none}
+.proc{display:block;color:var(--ink-3);font-size:11.5px}
+.find{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.dist{display:flex;gap:4px}
+.ptab .pos{color:var(--ink-3);font-family:var(--f-display);font-weight:700;width:28px}
+.ptab tr.grprow td{background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:6px 8px}
+.panel{display:flex;flex-direction:column;gap:10px}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
 </style>
-</head>
-<body>
+
+<nav class="nav" aria-label="Secciones"><div class="navin">
+  <a href="#resumen">1 · Resumen</a><a href="#herramientas">2 · Herramientas</a><a href="#productos">3 · Productos</a><a href="#roles">4 · Roles</a><a href="#personas">5 · Personas</a><a href="#matriz">6 · Matriz</a><a href="#plan">7 · Plan de cierre</a>
+</div></nav>
 <div class="wrap">
   <header>
-    <div>
-      <h1>Adopción de Soluciones Tecnológicas + IA</h1>
-      <div class="sub">Producción · % de adopción vs meta del rol (promedio de tools con meta SI ÷ 5) · Escala 1 Sin conocimiento → 5 Experto</div>
-    </div>
-    <div class="ctrl">
-      <select id="fRol" aria-label="Filtrar por rol"><option value="">Todos los roles</option></select>
-      <select id="fProd" aria-label="Filtrar por producto"><option value="">Todos los productos</option></select>
-      <button class="primary" id="btnR">Actualizar</button>
-      <span class="stamp" id="stamp">Cargando…</span>
-    </div>
+    <div class="eyebrow">Producción · Matriz de adopción de soluciones tecnológicas + IA · Octubre 2026 · Datos al 28-oct</div>
+    <h1>Nivel de adopción de herramientas</h1>
+    <p class="sub">Meta: <b>mínimo 4 personas en nivel 4 (Avanzado · Integra) o 5 (Experto · Transforma)</b> por herramienta. Escala 1 Sin conocimiento · 2 Principiante · 3 Competente · 4 Avanzado · 5 Experto.</p>
   </header>
-  <div class="err" id="err"></div>
-  <div class="kpis" id="kpis"></div>
-  <div class="grid">
-    <div class="card"><h2>Ranking por persona</h2><div class="hint">% adopción vs meta del rol · línea punteada = 60%</div><div class="bars" id="rank"></div>
-      <div class="legend"><span><i style="background:var(--strong)"></i>≥ 80% Fuerte</span><span><i style="background:var(--good)"></i>60–79% En meta</span><span><i style="background:var(--warn)"></i>40–59% En desarrollo</span><span><i style="background:var(--crit)"></i>&lt; 40% Crítico</span></div></div>
-    <div>
-      <div class="card" style="margin-bottom:14px"><h2>Adopción por tool</h2><div class="hint">Solo personas cuyo rol tiene la tool como meta</div><div class="bars" id="tools"></div></div>
-      <div class="card"><h2>Distribución por nivel</h2><div class="hint">Nivel = promedio redondeado de tools con meta</div><div class="dist" id="dist"></div><div class="legend" id="distLeg"></div></div>
+
+  <section id="resumen">
+    <div class="sechead"><span class="secn">1</span><div><h2>Resumen ejecutivo</h2><p class="note">Estado general del equipo frente a la meta.</p></div></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="panel"><h3>Hallazgos clave</h3><ul class="find" id="find"></ul></div>
+  </section>
+
+  <section id="herramientas">
+    <div class="sechead"><span class="secn">2</span><div><h2>Adopción por herramienta vs meta</h2><p class="note">Índice ponderado = 60% cobertura experta (personas nivel 4-5 ÷ meta 4, tope 100%) + 40% nivel promedio normalizado de los roles que deben conocer la herramienta.</p></div></div>
+    <div class="panel">
+      <div class="legend"><span><span class="sw" style="background:var(--meta);width:3px"></span>Meta 4 personas</span><span class="pill ok">✓ Cumple ≥5</span><span class="pill lim">▲ Al límite =4</span><span class="pill gap">✕ Brecha &lt;4</span></div>
+      <div class="scroll"><table id="tools"></table></div>
     </div>
-  </div>
-  <div class="card"><h2>Matriz de adopción</h2><div class="hint">Gris = tool fuera de la meta del rol (no pondera)</div><div class="tablewrap"><table id="mx"></table></div>
-    <div class="legend"><span><i style="background:var(--l1)"></i>1 Sin conocimiento · No usa</span><span><i style="background:var(--l2)"></i>2 Principiante · Explora</span><span><i style="background:var(--l3)"></i>3 Competente · Aplica</span><span><i style="background:var(--l4)"></i>4 Avanzado · Integra</span><span><i style="background:var(--l5)"></i>5 Experto · Transforma</span></div></div>
-  <footer>Fuente: Google Sheets «Nivel Productividad Produccion», pestaña ADOPCION (publicada). Los datos se leen en vivo cada vez que se abre o se pulsa Actualizar; Google puede tardar hasta ~5 min en reflejar cambios.</footer>
+    <div class="panel"><h3>Vista consolidada por herramienta</h3><p class="note" style="margin:0">Herramientas usadas en más de un proceso (Traductor Lovable, Codex) se agrupan para ver el dominio transversal.</p>
+      <div class="scroll"><table id="tcons"></table></div></div>
+  </section>
+
+  <section id="productos">
+    <div class="sechead"><span class="secn">3</span><div><h2>Top dominio por producto</h2><p class="note">Ranking por nivel promedio en las herramientas del producto (fila 4); desempate por número de herramientas en nivel 4-5.</p></div></div>
+    <div class="grid3" id="tops"></div>
+  </section>
+
+  <section id="roles">
+    <div class="sechead"><span class="secn">4</span><div><h2>Adopción por rol</h2><p class="note">Promedio del score de adopción (0-100%) de las personas del rol, calculado solo sobre las herramientas que el rol debe conocer.</p></div></div>
+    <div class="panel"><div class="scroll"><table id="roletab"></table></div></div>
+  </section>
+
+  <section id="personas">
+    <div class="sechead"><span class="secn">5</span><div><h2>Score de adopción por persona</h2><p class="note">Score 0-100% = nivel promedio en las herramientas con meta SI para el rol ÷ 5 (misma ponderación de la hoja fuente). Celdas en 0 = no evaluado, no entran al promedio. Content: 6 herramientas · Técnico/HD/SR: 10.</p></div></div>
+    <div class="panel">
+      <div class="rolehead"><div class="toggle" id="rf"></div>
+        <div class="legend"><span class="pill ok">● Meta ≥60%</span><span class="pill lim">● En desarrollo 40-59%</span><span class="pill gap">● Foco &lt;40%</span><span><span class="sw" style="background:var(--meta);width:3px"></span>Meta 60%</span></div></div>
+      <div class="scroll"><table id="ptab" class="ptab"></table></div>
+    </div>
+  </section>
+
+  <section id="matriz">
+    <div class="sechead"><span class="secn">6</span><div><h2>Matriz persona × herramienta</h2><p class="note">Detalle del nivel 1-5 por persona, agrupado por rol y producto.</p></div></div>
+    <div class="panel">
+      <div class="legend"><span><span class="sw" style="background:var(--l1);border:1px solid var(--line)"></span>1</span><span><span class="sw" style="background:var(--l2)"></span>2</span><span><span class="sw" style="background:var(--l3)"></span>3</span><span><span class="sw" style="background:var(--l4)"></span>4</span><span><span class="sw" style="background:var(--l5)"></span>5</span><span>● requerida para el rol · atenuada = no requerida · – = 0 no evaluado</span><span><span class="sw" style="background:var(--p-web)"></span>WEB</span><span><span class="sw" style="background:var(--p-rrss)"></span>RRSS</span><span><span class="sw" style="background:var(--p-seo)"></span>SEO</span></div>
+      <div class="scroll"><table class="hm" id="hm"></table></div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="sechead"><span class="secn">7</span><div><h2>Plan de cierre de brechas</h2><p class="note">Herramientas bajo meta o sin holgura, con mentores y candidatos.</p></div></div>
+    <div class="panel plan" id="planbox"></div>
+  </section>
 </div>
-<div class="tip" id="tip"></div>
+<div class="tip" id="tip" hidden></div>
+
 <script>
-const SRC='https://docs.google.com/spreadsheets/d/e/2PACX-1vR6i65qNRF4-G_-IWNZGhRbb5unVrNN1SGxp4ALO2_zcGYct5lndi6yT8V3Jk7joxE7sxfI5c-iFLQB/pub?gid=1485843121&single=true&output=csv';
-const LV=['','Sin conocimiento','Principiante','Competente','Avanzado','Experto'];
-const LVC=['','var(--l1)','var(--l2)','var(--l3)','var(--l4)','var(--l5)'];
-let DATA=null;
-function parseCSV(t){const rows=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}else if(c=='"')q=true;else if(c==','){row.push(f);f=''}else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;row.push(f);rows.push(row);row=[];f=''}else f+=c}if(f!==''||row.length){row.push(f);rows.push(row)}return rows}
-const T=s=>(s||'').replace(/\s+/g,' ').trim();
-function model(rows){
-  const find=fn=>rows.findIndex(fn);
-  const iC=find(r=>T(r[2]).toUpperCase().startsWith('CONTENT')&&r.slice(3).some(v=>/^(SI|NO)$/i.test(T(v))));
-  const iT=iC+1, iP=find(r=>T(r[2]).toUpperCase()=='PRODUCTO'), iTool=find(r=>T(r[2]).toUpperCase()=='TOOL'), iH=find(r=>T(r[1]).toUpperCase()=='NOMBRE');
-  if(iC<0||iH<0) throw new Error('No se encontró la estructura esperada (META / NOMBRE).');
-  const H=rows[iH].map(T); const pctCol=H.findIndex(h=>/adopci/i.test(h)); const lvlCol=H.findIndex(h=>/^nivel$/i.test(h));
-  const cols=[];let prod='';for(let c=3;c<(pctCol>0?pctCol:H.length);c++){if(!H[c])continue;prod=T(rows[iP]?.[c])||prod;cols.push({c,act:H[c],tool:T(rows[iTool]?.[c]),prod,mC:T(rows[iC][c]).toUpperCase()=='SI',mT:T(rows[iT][c]).toUpperCase()=='SI'})}
-  const people=[];for(let r=iH+1;r<rows.length;r++){const n=T(rows[r][1]);if(!n)break;const rol=T(rows[r][2]);const isC=rol.toUpperCase().startsWith('CONTENT');
-    const s=cols.map(k=>parseFloat(rows[r][k.c]));const meta=cols.map(k=>isC?k.mC:k.mT);
-    let p=pctCol>0?parseFloat(String(rows[r][pctCol]).replace(',','.')):NaN;p=isNaN(p)?null:p/100;
-    people.push({n,rol,isC,s,meta,p,lvl:lvlCol>0?T(rows[r][lvlCol]):''})}
-  return{cols,people}}
-function pctOf(x,ix){const idx=ix.filter(i=>x.meta[i]&&!isNaN(x.s[i]));if(!idx.length)return null;return idx.reduce((a,i)=>a+x.s[i],0)/idx.length/5}
-const band=p=>p>=.8?'var(--strong)':p>=.6?'var(--good)':p>=.4?'var(--warn)':'var(--crit)';
-const fmt=p=>p==null?'–':Math.round(p*100)+'%';
-const first=n=>n.split(' ')[0].charAt(0)+n.split(' ')[0].slice(1).toLowerCase();
-const tip=document.getElementById('tip');
-function tipOn(el,html){el.addEventListener('mousemove',e=>{tip.innerHTML=html;tip.style.opacity=1;tip.style.left=Math.min(e.clientX+12,innerWidth-270)+'px';tip.style.top=(e.clientY+12)+'px'});el.addEventListener('mouseleave',()=>tip.style.opacity=0)}
-function render(){
-  if(!DATA)return;const fr=fRol.value,fp=fProd.value;
-  const ix=DATA.cols.map((k,i)=>i).filter(i=>!fp||DATA.cols[i].prod==fp);
-  const P=DATA.people.filter(x=>!fr||x.rol==fr).map(x=>({...x,v:fp?pctOf(x,ix):(x.p??pctOf(x,ix))})).filter(x=>x.v!=null);
-  const avg=a=>a.length?a.reduce((s,x)=>s+x,0)/a.length:null;
-  const g=avg(P.map(x=>x.v)),gc=avg(P.filter(x=>x.isC).map(x=>x.v)),gt=avg(P.filter(x=>!x.isC).map(x=>x.v));
-  const srt=[...P].sort((a,b)=>b.v-a.v);
-  const K=[[fmt(g),'Adopción global vs meta'],[fmt(gc),'Content Specialist'],[fmt(gt),'Técnico · HD · SR'],[P.filter(x=>x.v>=.6).length+' / '+P.length,'Personas ≥ 60%'],
-    [srt[0]?first(srt[0].n)+' · '+fmt(srt[0].v):'–','Mayor adopción'],[srt.length?first(srt.at(-1).n)+' · '+fmt(srt.at(-1).v):'–','Menor adopción'],[P.filter(x=>x.v<.4).length,'Personas < 40% (foco)']];
-  kpis.innerHTML=K.map(([b,s])=>`<div class="k"><b>${b}</b><span>${s}</span></div>`).join('');
-  rank.innerHTML='';srt.forEach(x=>{const d=document.createElement('div');d.className='row';
-    d.innerHTML=`<div class="lbl" title="${x.n}">${x.n.split(' ').slice(0,2).join(' ')} <small>· ${x.rol.replace(' SPECIALIST','').replace('PRODUCTION','PROD.')}</small></div><div class="track"><div class="fill" style="width:${x.v*100}%;background:${band(x.v)}"></div><div class="goal" style="left:60%"></div></div><div class="val">${fmt(x.v)}</div>`;
-    tipOn(d,`<b>${x.n}</b><br>${x.rol}<br>Adopción vs meta: <b>${fmt(x.v)}</b><br>Nivel: ${LV[Math.round(x.v*5)]||'–'}`);rank.appendChild(d)});
-  tools.innerHTML='';ix.map(i=>{const k=DATA.cols[i];const w=P.filter(x=>x.meta[i]&&!isNaN(x.s[i]));return{k,v:w.length?avg(w.map(x=>x.s[i]))/5:null,nn:w.length}}).filter(t=>t.v!=null).sort((a,b)=>b.v-a.v).forEach(t=>{
-    const d=document.createElement('div');d.className='row';d.innerHTML=`<div class="lbl" title="${t.k.act}">${t.k.act} <small>· ${t.k.tool}</small></div><div class="track"><div class="fill" style="width:${t.v*100}%;background:${band(t.v)}"></div><div class="goal" style="left:60%"></div></div><div class="val">${fmt(t.v)}</div>`;
-    tipOn(d,`<b>${t.k.act}</b><br>Tool: ${t.k.tool} · ${t.k.prod}<br>Adopción: <b>${fmt(t.v)}</b><br>Base: ${t.nn} personas con meta`);tools.appendChild(d)});
-  const cnt=[0,0,0,0,0,0];P.forEach(x=>cnt[Math.max(1,Math.round(x.v*5))]++);
-  dist.innerHTML=[1,2,3,4,5].filter(l=>cnt[l]).map(l=>`<div style="flex:${cnt[l]};background:${LVC[l]}" title="${LV[l]}: ${cnt[l]}">${cnt[l]}</div>`).join('');
-  distLeg.innerHTML=[1,2,3,4,5].map(l=>`<span><i style="background:${LVC[l]}"></i>${LV[l]}: <b>${cnt[l]}</b></span>`).join('');
-  const groups=[];ix.forEach(i=>{const p=DATA.cols[i].prod;if(groups.length&&groups.at(-1).p==p)groups.at(-1).n++;else groups.push({p,n:1})});
-  let h=`<thead><tr class="grp"><th colspan=2></th>${groups.map(g=>`<th colspan=${g.n}>${g.p}</th>`).join('')}<th colspan=2>PONDERACIÓN</th></tr>
-  <tr class="tool"><th colspan=2></th>${ix.map(i=>`<th>${DATA.cols[i].tool}</th>`).join('')}<th colspan=2></th></tr>
-  <tr><th>Nombre</th><th>Rol</th>${ix.map(i=>`<th>${DATA.cols[i].act}</th>`).join('')}<th>% vs meta</th><th>Nivel</th></tr></thead><tbody>`;
-  P.forEach(x=>{h+=`<tr><td class="n">${x.n}</td><td class="r">${x.rol}</td>${ix.map(i=>{const v=x.s[i];return `<td class="${x.meta[i]?'c'+v:'off'}">${isNaN(v)?'':v}</td>`}).join('')}<td class="pct"><span class="chip" style="background:${band(x.v)}">${fmt(x.v)}</span></td><td>${LV[Math.round(x.v*5)]||''}</td></tr>`});
-  mx.innerHTML=h+'</tbody>';
+const TOOLS=[
+ ["Wflow","Creación web básica","WEB",0,1],["Traductor Lovable","Creación web advance","WEB",0,1],["JetEngine/Woo","Creación web advance ECOM","WEB",0,1],
+ ["Agente Cambios","Feedback ajuste común","WEB",1,1],["MCP","Feedback ajuste técnico","WEB",0,1],["Traductor Lovable","Rediseño","WEB",0,1],["Codex","Ajustes generales","WEB",1,1],
+ ["Content Factory","Fase anual","RRSS",1,0],["Capas Mágicas","Ajustes FBK","RRSS",1,0],
+ ["SEO Tools","Creación estrategia KD","SEO",1,1],["Codex","Implementación KD","SEO",0,1],["Codex","Implementación Revenue","SEO",1,1]
+].map(([tl,pr,p,c,t])=>({tl,pr,p,c,t,n:`${tl} · ${pr}`}));
+const P=[
+["Karen Falla","CONTENT SPECIALIST",[1,1,1,1,1,1,1,5,5,1,1,1],"Principiante"],
+["Maira Muñoz","CONTENT SPECIALIST",[1,1,1,1,1,1,1,5,5,1,1,1],"Principiante"],
+["Laura Victoria","CONTENT SPECIALIST",[1,1,1,1,1,1,1,1,1,3,1,1],"Sin conocimiento"],
+["Jonathan Consuegra","CONTENT SPECIALIST",[1,1,1,1,1,1,1,1,1,4,1,4],"Principiante"],
+["Maria Camila Martinez","CONTENT SPECIALIST",[1,1,1,1,2,1,1,5,5,1,1,1],"Principiante"],
+["Danna Doncel","CONTENT SPECIALIST",[1,1,1,1,1,1,1,5,5,1,1,1],"Principiante"],
+["Ximena Mendez","CONTENT SPECIALIST",[1,1,1,1,2,1,1,5,5,1,1,1],"Principiante"],
+["Angie Ocampo","CONTENT SPECIALIST",[1,1,1,1,2,1,1,5,5,1,1,1],"Principiante"],
+["Maximiliano Lapera","HD ANALYST",[4,4,4,5,4,2,2,2,1,1,1,1],"Competente"],
+["Fernanda Lima","HD ANALYST",[4,4,4,5,4,2,1,2,1,1,1,1],"Competente"],
+["Luisa Mayorga","HD ANALYST",[4,4,4,5,3,2,1,2,1,1,1,1],"Competente"],
+["Leonardo Múnera","SR PRODUCTION SPECIALIST",[1,1,1,4,3,2,4,1,1,4,4,4],"Competente"],
+["Daniela Lozano","SR PRODUCTION SPECIALIST",[5,5,5,5,5,5,5,1,1,1,1,1],"Avanzado"],
+["Sebastian Quintero","TECHNICAL SPECIALIST",[5,5,5,5,5,5,5,1,1,1,4,4],"Avanzado"],
+["John Lozano","TECHNICAL SPECIALIST",[2,2,2,4,5,2,4,1,1,5,4,4],"Competente"],
+["Miguel Echeverri","TECHNICAL SPECIALIST",[5,5,5,5,5,5,5,1,1,1,4,4],"Avanzado"],
+["Rafael Orjuela","TECHNICAL SPECIALIST",[5,5,5,5,5,5,5,1,1,3,4,4],"Experto"],
+["Manuel Narvaez","TECHNICAL SPECIALIST",[2,2,2,4,3,3,3,1,1,1,1,1],"Principiante"],
+["David Caez","TECHNICAL SPECIALIST",[5,5,5,5,4,5,3,1,1,1,1,1],"Avanzado"],
+["Lorena Montoya","TECHNICAL SPECIALIST",[3,4,4,5,4,4,2,1,1,1,1,1],"Competente"],
+["Erick Guapacha","TECHNICAL SPECIALIST",[3,2,2,3,3,3,3,1,1,0,0,0],"Competente"],
+["Roy Gonzalias","CONTENT SPECIALIST",[1,1,1,0,1,1,0,3,3,0,1,0],"Competente"],
+["Carolina Montenegro","CONTENT SPECIALIST",[1,1,1,0,1,1,0,3,3,0,1,0],"Competente"]];
+const META=4, ROLES=["TECHNICAL SPECIALIST","SR PRODUCTION SPECIALIST","HD ANALYST","CONTENT SPECIALIST"];
+const ROLE_LBL={"TECHNICAL SPECIALIST":"Technical Specialist","SR PRODUCTION SPECIALIST":"Sr Production Specialist","HD ANALYST":"HD Analyst","CONTENT SPECIALIST":"Content Specialist"};
+const req=(role,i)=>role==="CONTENT SPECIALIST"?TOOLS[i].c===1:TOOLS[i].t===1;
+const pct=x=>Math.round(x*100)+"%", f1=x=>x.toFixed(1).replace(".",",");
+const avg=a=>a.reduce((s,x)=>s+x,0)/a.length;
+
+// --- herramientas
+const T=TOOLS.map((t,i)=>{
+  const all=P.map(p=>p[2][i]); const elig=P.filter(p=>req(p[1],i)&&p[2][i]>0).map(p=>p[2][i]);
+  const n45=all.filter(v=>v>=4).length, n5=all.filter(v=>v===5).length, a=avg(elig);
+  const idx=.6*Math.min(n45/META,1)+.4*((a-1)/4);
+  const st=n45>=5?"ok":n45===4?"lim":"gap";
+  return {...t,i,n45,n5,a,idx,st,gap:Math.max(0,META-n45)};
+});
+// --- personas
+const PS0=P.map(([n,r,v,lab])=>{const ri=v.map((x,i)=>i).filter(i=>req(r,i)&&v[i]>0); const lv=ri.map(i=>v[i]);
+  return {n,r,v,lab,niv:(avg(lv)-1)/4,lvl:avg(lv),cov:lv.filter(x=>x>=4).length/lv.length,nreq:lv.length,exp:v.filter(x=>x>=4).length};});
+
+const PS=PS0.map(p=>({...p,score:p.lvl/5}));
+const band=x=>x>=.6?'ok':x>=.4?'lim':'gap', BCOL={ok:'var(--good)',lim:'var(--warn)',gap:'var(--crit)'};
+// KPIs
+const ok=T.filter(t=>t.st!=="gap").length, gaps=T.filter(t=>t.st==="gap");
+const k=[[`${ok}/12`,"herramientas cumplen la meta de 4 expertos"],[`${gaps.length}`,"herramientas en brecha: "+gaps.map(t=>t.n).join(" · ")],
+ [pct(avg(PS.map(p=>p.score))),`adopción global · Content ${pct(avg(PS.filter(p=>p.r==="CONTENT SPECIALIST").map(p=>p.score)))} · Técnico ${pct(avg(PS.filter(p=>p.r!=="CONTENT SPECIALIST").map(p=>p.score)))}`],[`${PS.filter(p=>p.score>=.6).length}/23`,"personas en meta (≥60% de adopción)"]];
+document.getElementById("kpis").innerHTML=k.map(([b,s],j)=>`<div class="kpi"><b class="num" style="color:${j===1&&gaps.length?'var(--crit)':'var(--ink)'}">${b}</b><span>${s}</span></div>`).join("");
+
+// tabla herramientas
+const ST={ok:'<span class="pill ok">✓ Cumple</span>',lim:'<span class="pill lim">▲ Al límite</span>',gap:'<span class="pill gap">✕ Brecha</span>'};
+const sorted=[...T].sort((a,b)=>b.idx-a.idx);
+document.getElementById("tools").innerHTML=`<tr><th>Herramienta · Proceso</th><th>Producto</th><th>Personas nivel 4-5 (meta 4)</th><th class="num">Nivel 5</th><th class="num">% adopción</th><th class="num">Índice</th><th>Estado</th></tr>`+
+sorted.map(t=>{const w=t.n45/23*100,m=META/23*100;const col=t.st==="ok"?"var(--good)":t.st==="lim"?"var(--warn)":"var(--crit)";
+ return `<tr data-tip="${t.n}: ${t.n45} personas en 4-5 · ${t.n5} expertas · faltan ${t.gap}"><td><b>${t.tl}</b><small class="proc">${t.pr}</small></td><td><span class="prod">${t.p}</span></td>
+ <td><div style="display:flex;align-items:center;gap:8px"><div class="bar" style="flex:1"><div class="track"></div><div class="fill" style="width:${w}%;background:${col}"></div><div class="metaline" style="left:${m}%"></div></div><b class="num" style="width:22px">${t.n45}</b></div></td>
+ <td class="num">${t.n5}</td><td class="num">${pct(t.a/5)}</td><td class="num"><b>${pct(t.idx)}</b></td><td>${ST[t.st]}</td></tr>`}).join("");
+
+// consolidado por herramienta
+const UT=[...new Set(TOOLS.map(t=>t.tl))];
+document.getElementById("tcons").innerHTML=`<tr><th>Herramienta</th><th>Procesos</th><th class="num">Expertos en ≥1 proceso</th><th class="num">Expertos en todos</th><th>Estado</th></tr>`+
+UT.map(tl=>{const ix=TOOLS.map((t,i)=>i).filter(i=>TOOLS[i].tl===tl);
+ const any=PS.filter(p=>ix.some(i=>p.v[i]>=4)).length, all=PS.filter(p=>ix.every(i=>p.v[i]>=4)).length; const st=all>=5?"ok":all===4?"lim":"gap";
+ return {tl,ix,any,all,st}}).sort((a,b)=>b.ix.length-a.ix.length||b.all-a.all).map(u=>`<tr><td><b>${u.tl}</b></td><td class="note">${u.ix.map(i=>`<span class="prod">${TOOLS[i].p}</span> ${TOOLS[i].pr}`).join("<br>")}</td><td class="num">${u.any}</td><td class="num"><b>${u.all}</b></td><td>${ST[u.st]}</td></tr>`).join("");
+
+// tops por producto
+document.getElementById("tops").innerHTML=["WEB","RRSS","SEO"].map(pr=>{
+ const ix=T.filter(t=>t.p===pr).map(t=>t.i);
+ const r=PS.map(p=>({...p,pa:avg(ix.map(i=>p.v[i])),pe:ix.filter(i=>p.v[i]>=4).length})).sort((a,b)=>b.pa-a.pa||b.pe-a.pe).slice(0,5);
+ const tt=T.filter(t=>t.p===pr), okc=tt.filter(t=>t.st!=="gap").length;
+ return `<div class="panel"><div class="rolehead"><h3><span class="prod">${pr}</span> ${ix.length} herramientas</h3><span class="pill ${okc===tt.length?'ok':'gap'}">${okc}/${tt.length} en meta</span></div>
+ <ol class="rank">${r.map((p,j)=>`<li><span class="pos">${j+1}</span><span class="who">${p.n}<small>${ROLE_LBL[p.r]} · ${p.pe}/${ix.length} en nivel 4-5</small></span><span class="val num">${f1(p.pa)}/5</span></li>`).join("")}</ol></div>`}).join("");
+
+// hallazgos
+const rs=ROLES.map(r=>({r,s:avg(PS.filter(p=>p.r===r).map(p=>p.score))})).sort((a,b)=>b.s-a.s);
+const best=[...PS].sort((a,b)=>b.score-a.score)[0];
+document.getElementById("find").innerHTML=[
+ `<b>${ok} de 12</b> herramientas cumplen la meta; en brecha: ${gaps.map(t=>`<b>${t.n}</b> (${t.n45}/4)`).join(" y ")}.`,
+ `<b>SEO</b> concentra la brecha: solo ${T[9].n45} personas en nivel 4-5 en SEO Tools (${PS.filter(p=>p.v[9]>=4).map(p=>p.n).join(", ")}); en Codex SEO hay ${PS.filter(p=>[10,11].some(i=>p.v[i]>=4)).length} personas en 4-5.`,
+ `Por rol, lidera <b>${ROLE_LBL[rs[0].r]}</b> (${pct(rs[0].s)}) y el menor score es <b>${ROLE_LBL[rs[rs.length-1].r]}</b> (${pct(rs[rs.length-1].s)}).`,
+ `<b>${PS.filter(p=>p.score>=.6).length} de 23</b> personas alcanzan la meta de 60% de adopción en las herramientas de su rol (máximo: ${best.n}, ${pct(best.score)}).`
+].map(x=>`<li>${x}</li>`).join("");
+
+// roles
+document.getElementById("roletab").innerHTML=`<tr><th>Rol</th><th class="num">Personas</th><th class="num">Herr. requeridas</th><th>Score promedio de adopción</th><th class="num">Cobertura 4-5</th><th>Distribución</th><th>Menor dominio</th></tr>`+
+ROLES.map(r=>{const ps=PS.filter(p=>p.r===r), sc=avg(ps.map(p=>p.score)), rq=TOOLS.map((t,i)=>i).filter(i=>req(r,i));
+ const weak=rq.map(i=>({i,a:avg(ps.map(p=>p.v[i]))})).sort((a,b)=>a.a-b.a).slice(0,2);
+ const d={ok:0,lim:0,gap:0}; ps.forEach(p=>d[band(p.score)]++);
+ return `<tr><td><b>${ROLE_LBL[r]}</b></td><td class="num">${ps.length}</td><td class="num">${rq.length}</td>
+ <td><div style="display:flex;align-items:center;gap:8px"><div class="bar" style="flex:1;min-width:120px"><div class="track"></div><div class="fill" style="width:${sc*100}%;background:${BCOL[band(sc)]}"></div><div class="metaline" style="left:60%"></div></div><b class="num" style="width:38px;text-align:right">${pct(sc)}</b></div></td>
+ <td class="num">${pct(avg(ps.map(p=>p.cov)))}</td>
+ <td><span class="dist">${d.ok?`<span class="pill ok">${d.ok}</span>`:''}${d.lim?`<span class="pill lim">${d.lim}</span>`:''}${d.gap?`<span class="pill gap">${d.gap}</span>`:''}</span></td>
+ <td class="note">${weak.map(w=>`${TOOLS[w.i].n} (${f1(w.a)})`).join("<br>")}</td></tr>`}).join("");
+
+// personas
+let RF="ALL";
+function drawP(){
+ const list=ROLES.filter(r=>RF==="ALL"||r===RF);
+ let h=`<tr><th class="num">#</th><th>Persona</th><th>Rol</th><th>Score de adopción</th><th>Nivel</th><th class="num">Nivel prom.</th><th class="num">Requeridas 4-5</th><th>Estado</th></tr>`;
+ list.forEach(r=>{ if(RF==="ALL") h+=`<tr class="grprow"><td colspan="8">${ROLE_LBL[r]} · promedio ${pct(avg(PS.filter(p=>p.r===r).map(p=>p.score)))}</td></tr>`;
+  PS.filter(p=>p.r===r).sort((a,b)=>b.score-a.score).forEach((p,j)=>{const bd=band(p.score);
+   h+=`<tr data-tip="${p.n}: cobertura ${pct(p.cov)} · nivel ${f1(p.lvl)}/5"><td class="num pos">${j+1}</td><td>${p.n}</td><td class="note">${ROLE_LBL[r]}</td>
+   <td><div style="display:flex;align-items:center;gap:8px"><div class="bar" style="flex:1;min-width:160px"><div class="track"></div><div class="fill" style="width:${Math.max(p.score*100,1.5)}%;background:${BCOL[bd]}"></div><div class="metaline" style="left:60%"></div></div><b class="num" style="width:38px;text-align:right">${pct(p.score)}</b></div></td>
+   <td class="note">${p.lab}</td><td class="num">${f1(p.lvl)}</td><td class="num">${Math.round(p.cov*p.nreq)}/${p.nreq}</td><td><span class="pill ${bd}">${bd==='ok'?'En meta':bd==='lim'?'En desarrollo':'Foco'}</span></td></tr>`;});});
+ document.getElementById("ptab").innerHTML=h;
+ document.querySelectorAll("#rf button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.r===RF));
 }
-async function load(){
-  stamp.textContent='Cargando…';err.style.display='none';
-  try{const r=await fetch(SRC+'&_='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);
-    DATA=model(parseCSV(await r.text()));
-    const roles=[...new Set(DATA.people.map(x=>x.rol))],prods=[...new Set(DATA.cols.map(k=>k.prod))];
-    const keep=(sel,list,ph)=>{const v=sel.value;sel.innerHTML=`<option value="">${ph}</option>`+list.map(x=>`<option${x==v?' selected':''}>${x}</option>`).join('')};
-    keep(fRol,roles,'Todos los roles');keep(fProd,prods,'Todos los productos');
-    render();stamp.textContent='Actualizado: '+new Date().toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
-  }catch(e){err.style.display='block';err.textContent='No se pudieron leer los datos de la hoja ('+e.message+'). Verifica que la pestaña ADOPCION siga publicada en la web.';stamp.textContent='Error'}
-}
-fRol.onchange=render;fProd.onchange=render;btnR.onclick=load;load();
+document.getElementById("rf").innerHTML=[["ALL","Todos"],...ROLES.map(r=>[r,ROLE_LBL[r]])].map(([r,l])=>`<button type="button" data-r="${r}">${l}</button>`).join("");
+document.getElementById("rf").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;RF=b.dataset.r;drawP();});
+drawP();
+
+// heatmap
+const LV=["transparent","var(--l1)","var(--l2)","var(--l3)","var(--l4)","var(--l5)"], NM=["No evaluado","Sin conocimiento","Principiante","Competente","Avanzado","Experto"];
+const G=i=>"g"+TOOLS[i].p, GS=i=>(i===0||TOOLS[i].p!==TOOLS[i-1].p)?" gs":"";
+let h=`<colgroup><col class="n">${TOOLS.map(()=>`<col class="c">`).join("")}</colgroup>`;
+h+=`<tr><th></th>${[["WEB",7,0],["RRSS",2,7],["SEO",3,9]].map(([p,n,i])=>`<th class="grp g${p} gs" colspan="${n}">${p}</th>`).join("")}</tr>`;
+h+=`<tr><th class="rh">Persona</th>${TOOLS.map((t,i)=>`<th class="tool ${G(i)}${GS(i)}"><div><b>${t.tl}</b><span>${t.pr}</span></div></th>`).join("")}</tr>`;
+ROLES.forEach(r=>{
+ h+=`<tr class="rolesep"><td>${ROLE_LBL[r]}</td>${TOOLS.map((t,i)=>`<td class="c ${G(i)}${GS(i)}"></td>`).join("")}</tr>`;
+ PS.filter(p=>p.r===r).sort((a,b)=>b.score-a.score).forEach(p=>{
+  h+=`<tr><td class="nm" title="${p.n}">${p.n}</td>`+p.v.map((x,i)=>{const rq=req(r,i);
+   return `<td class="c ${G(i)}${GS(i)}"><div class="cell ${rq?'req':'na'}${x===0?' zero':''}" style="background:${LV[x]};color:${x>=4?'var(--l-ink-dark)':'var(--l-ink-light)'}" data-tip="${p.n} · ${TOOLS[i].p} · ${TOOLS[i].n}: ${x?x+' ':''}${NM[x]}${rq?'':' (no requerida para el rol)'}">${x}</div></td>`}).join("")+`</tr>`;});});
+document.getElementById("hm").innerHTML=h;
+
+// plan de cierre
+const plan=[...T].filter(t=>t.st!=="ok").sort((a,b)=>a.n45-b.n45).map(t=>{
+ const cand=PS.filter(p=>p.v[t.i]<4&&p.v[t.i]>=2&&req(p.r,t.i)).sort((a,b)=>b.v[t.i]-a.v[t.i]||b.score-a.score).slice(0,Math.max(t.gap,1)+2);
+ const exp=PS.filter(p=>p.v[t.i]>=4).map(p=>p.n);
+ return `<li><b>${t.n}</b> ${ST[t.st]} — ${t.n45}/4 expertos${t.gap?`, faltan <b>${t.gap}</b>`:" (sin holgura)"}. Mentores: ${exp.join(", ")||"—"}. Candidatos a subir a nivel 4: ${cand.map(p=>`${p.n} (nivel ${p.v[t.i]})`).join(", ")}.</li>`}).join("");
+document.getElementById("planbox").innerHTML=`<ul style="margin:0;padding-left:18px">${plan}</ul><p class="note">Candidatos = personas de roles que deben conocer la herramienta, con nivel actual 2-3, ordenadas por cercanía a nivel 4.</p>`;
+
+// tooltip
+const tip=document.getElementById("tip");
+document.addEventListener("mousemove",e=>{const el=e.target.closest("[data-tip]");if(!el){tip.hidden=true;return}tip.textContent=el.dataset.tip;tip.hidden=false;
+ tip.style.left=Math.min(e.clientX+12,innerWidth-270)+"px";tip.style.top=(e.clientY+14)+"px";});
 </script>
-</body>
-</html>
+</body></html>
