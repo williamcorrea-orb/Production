@@ -135,7 +135,7 @@ html{scroll-behavior:smooth} section{scroll-margin-top:60px}
   </section>
 
   <section id="herramientas">
-    <div class="sechead"><span class="secn">2</span><div><h2>Adopción por herramienta vs meta</h2><p class="note"><b>Cobertura Experta Mínima</b> = personas en nivel 4-5 ÷ meta de 4 (tope 100%; el excedente se muestra aparte). <b>% adopción</b> = nivel promedio de los roles que deben conocer la herramienta ÷ 5.</p></div></div>
+    <div class="sechead"><span class="secn">2</span><div><h2>Adopción por herramienta vs meta</h2><p class="note"><b>Índice Cobertura Mínima Requerida</b> = personas en nivel 4-5 ÷ meta de 4 (tope 100%; el excedente se muestra aparte). <b>% adopción</b> = nivel promedio de los roles que deben conocer la herramienta ÷ 5.</p></div></div>
     <div class="panel">
       <div class="legend"><span><span class="sw" style="background:var(--meta);width:3px"></span>Meta 4 personas</span><span class="pill ok">✓ Cumple ≥5</span><span class="pill lim">▲ Al límite =4</span><span class="pill gap">✕ Brecha &lt;4</span></div>
       <div class="scroll"><table id="tools"></table></div>
@@ -239,7 +239,7 @@ document.getElementById("kpis").innerHTML=k.map(([b,s],j)=>`<div class="kpi"><b 
 // tabla herramientas
 const ST={ok:'<span class="pill ok">✓ Cumple</span>',lim:'<span class="pill lim">▲ Al límite</span>',gap:'<span class="pill gap">✕ Brecha</span>'};
 const sorted=[...T].sort((a,b)=>b.n45-a.n45||b.a-a.a);
-document.getElementById("tools").innerHTML=`<tr><th>Herramienta · Proceso</th><th>Producto</th><th>Personas nivel 4-5 (meta 4)</th><th class="num">Nivel 5</th><th class="num">% adopción</th><th class="num">Cobertura Experta Mínima</th><th>Estado</th></tr>`+
+document.getElementById("tools").innerHTML=`<tr><th>Herramienta · Proceso</th><th>Producto</th><th>Personas nivel 4-5 (meta 4)</th><th class="num">Nivel 5</th><th class="num">% adopción</th><th class="num">Índice Cobertura Mínima Requerida</th><th>Estado</th></tr>`+
 sorted.map(t=>{const w=t.n45/23*100,m=META/23*100;const col=t.st==="ok"?"var(--good)":t.st==="lim"?"var(--warn)":"var(--crit)";
  return `<tr data-tip="${t.n}: ${t.n45} personas en 4-5 · ${t.n5} expertas · faltan ${t.gap}"><td><b>${t.tl}</b><small class="proc">${t.pr}${t.noreq?" · no requerida por ningún rol":""}</small></td><td><span class="prod">${t.p}</span></td>
  <td><div style="display:flex;align-items:center;gap:8px"><div class="bar" style="flex:1"><div class="track"></div><div class="fill" style="width:${w}%;background:${col}"></div><div class="metaline" style="left:${m}%"></div></div><b class="num" style="width:22px">${t.n45}</b></div></td>
