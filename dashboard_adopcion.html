@@ -123,7 +123,7 @@ html{scroll-behavior:smooth} section{scroll-margin-top:60px}
 </div></nav>
 <div class="wrap">
   <header>
-    <div class="eyebrow">Producción · Matriz de adopción de soluciones tecnológicas + IA · Octubre 2026 · Datos al 28-oct · act. 3</div>
+    <div class="eyebrow">Producción · Matriz de adopción de soluciones tecnológicas + IA · Octubre 2026 · Datos al 28-oct · act. 4</div>
     <h1>Nivel de adopción de herramientas</h1>
     <p class="sub">Meta: <b>mínimo 4 personas en nivel 4 (Avanzado · Integra) o 5 (Experto · Transforma)</b> por herramienta. Escala 1 Sin conocimiento · 2 Principiante · 3 Competente · 4 Avanzado · 5 Experto.</p>
   </header>
@@ -206,12 +206,12 @@ const P=[
 ["Manuel Narvaez","TECHNICAL SPECIALIST",[2,3,3,4,3,5,3,1,1,0,0,0],"Competente"],
 ["David Caez","TECHNICAL SPECIALIST",[5,5,5,5,3,5,3,1,1,1,1,1],"Competente"],
 ["Lorena Montoya","TECHNICAL SPECIALIST",[1,4,4,5,3,4,1,1,1,1,1,1],"Principiante"],
-["Erick Guapacha","PASANTE_TECHNICAL SPECIALIST",[4,4,4,3,3,4,3,0,0,0,0,0],"Avanzado"],
-["Roy Gonzalias","PASANTE_CONTENT SPECIALIST",[0,0,0,0,0,0,0,4,4,0,0,0],"Avanzado"],
-["Carolina Montenegro","PASANTE_CONTENT SPECIALIST",[0,0,0,0,0,0,0,4,4,0,0,0],"Avanzado"]];
-const META=4, ROLES=["TECHNICAL SPECIALIST","SR PRODUCTION SPECIALIST","HD ANALYST","PASANTE_TECHNICAL SPECIALIST","CONTENT SPECIALIST","PASANTE_CONTENT SPECIALIST"];
-const ROLE_LBL={"TECHNICAL SPECIALIST":"Technical Specialist","SR PRODUCTION SPECIALIST":"Sr Production Specialist","HD ANALYST":"HD Analyst","CONTENT SPECIALIST":"Content Specialist","PASANTE_TECHNICAL SPECIALIST":"Pasante Technical","PASANTE_CONTENT SPECIALIST":"Pasante Content"};
-const PAS=r=>r.startsWith("PASANTE");
+["Erick Guapacha","PASANTES",[4,4,4,3,3,4,3,0,0,0,0,0],"Avanzado"],
+["Roy Gonzalias","PASANTES",[0,0,0,0,0,0,0,4,4,0,0,0],"Avanzado"],
+["Carolina Montenegro","PASANTES",[0,0,0,0,0,0,0,4,4,0,0,0],"Avanzado"]];
+const META=4, ROLES=["TECHNICAL SPECIALIST","SR PRODUCTION SPECIALIST","HD ANALYST","CONTENT SPECIALIST","PASANTES"];
+const ROLE_LBL={"TECHNICAL SPECIALIST":"Technical Specialist","SR PRODUCTION SPECIALIST":"Sr Production Specialist","HD ANALYST":"HD Analyst","CONTENT SPECIALIST":"Content Specialist","PASANTES":"Pasantes"};
+const PAS=r=>r==="PASANTES";
 const req=(role,i)=>PAS(role)?true:role==="CONTENT SPECIALIST"?TOOLS[i].c===1:TOOLS[i].t===1;
 const pct=x=>Math.round(x*100)+"%", f1=x=>x.toFixed(1).replace(".",",");
 const avg=a=>a.reduce((s,x)=>s+x,0)/a.length;
