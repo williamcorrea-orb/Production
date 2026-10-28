@@ -123,7 +123,7 @@ html{scroll-behavior:smooth} section{scroll-margin-top:60px}
 </div></nav>
 <div class="wrap">
   <header>
-    <div class="eyebrow">Producción · Matriz de adopción de soluciones tecnológicas + IA · Octubre 2026 · Datos al 28-oct</div>
+    <div class="eyebrow">Producción · Matriz de adopción de soluciones tecnológicas + IA · Octubre 2026 · Datos al 28-oct · act. 2</div>
     <h1>Nivel de adopción de herramientas</h1>
     <p class="sub">Meta: <b>mínimo 4 personas en nivel 4 (Avanzado · Integra) o 5 (Experto · Transforma)</b> por herramienta. Escala 1 Sin conocimiento · 2 Principiante · 3 Competente · 4 Avanzado · 5 Experto.</p>
   </header>
@@ -155,7 +155,7 @@ html{scroll-behavior:smooth} section{scroll-margin-top:60px}
   </section>
 
   <section id="personas">
-    <div class="sechead"><span class="secn">5</span><div><h2>Score de adopción por persona</h2><p class="note">Score 0-100% = nivel promedio en las herramientas con meta SI para el rol ÷ 5 (misma ponderación de la hoja fuente). Celdas en 0 = no evaluado, no entran al promedio. Content: 6 herramientas · Técnico/HD/SR: 10.</p></div></div>
+    <div class="sechead"><span class="secn">5</span><div><h2>Score de adopción por persona</h2><p class="note">Score 0-100% = nivel promedio en las herramientas con meta SI para el rol ÷ 5 (misma ponderación de la hoja fuente). Celdas en 0 = no evaluado, no entran al promedio. Content: 5 herramientas · Técnico/HD/SR: 9.</p></div></div>
     <div class="panel">
       <div class="rolehead"><div class="toggle" id="rf"></div>
         <div class="legend"><span class="pill ok">● Meta ≥60%</span><span class="pill lim">● En desarrollo 40-59%</span><span class="pill gap">● Foco &lt;40%</span><span><span class="sw" style="background:var(--meta);width:3px"></span>Meta 60%</span></div></div>
@@ -181,34 +181,34 @@ html{scroll-behavior:smooth} section{scroll-margin-top:60px}
 <script>
 const TOOLS=[
  ["Wflow","Creación web básica","WEB",0,1],["Traductor Lovable","Creación web advance","WEB",0,1],["JetEngine/Woo","Creación web advance ECOM","WEB",0,1],
- ["Agente Cambios","Feedback ajuste común","WEB",1,1],["MCP","Feedback ajuste técnico","WEB",0,1],["Traductor Lovable","Rediseño","WEB",0,1],["Codex","Ajustes generales","WEB",1,1],
+ ["Agente Cambios","Feedback ajuste común","WEB",0,0],["MCP","Feedback ajuste técnico","WEB",0,1],["Traductor Lovable","Rediseño","WEB",0,1],["Codex","Ajustes generales","WEB",1,1],
  ["Content Factory","Fase anual","RRSS",1,0],["Capas Mágicas","Ajustes FBK","RRSS",1,0],
  ["SEO Tools","Creación estrategia KD","SEO",1,1],["Codex","Implementación KD","SEO",0,1],["Codex","Implementación Revenue","SEO",1,1]
 ].map(([tl,pr,p,c,t])=>({tl,pr,p,c,t,n:`${tl} · ${pr}`}));
 const P=[
-["Karen Falla","CONTENT SPECIALIST",[1,1,1,1,1,1,1,5,5,1,1,1],"Principiante"],
-["Maira Muñoz","CONTENT SPECIALIST",[1,1,1,1,1,1,1,5,5,1,1,1],"Principiante"],
+["Karen Falla","CONTENT SPECIALIST",[1,1,1,1,1,1,1,5,5,1,1,1],"Competente"],
+["Maira Muñoz","CONTENT SPECIALIST",[1,1,1,1,1,1,1,5,5,1,1,1],"Competente"],
 ["Laura Victoria","CONTENT SPECIALIST",[1,1,1,1,1,1,1,1,1,3,1,1],"Sin conocimiento"],
-["Jonathan Consuegra","CONTENT SPECIALIST",[1,1,1,1,1,1,1,1,1,4,1,4],"Principiante"],
-["Maria Camila Martinez","CONTENT SPECIALIST",[1,1,1,1,2,1,1,5,5,1,1,1],"Principiante"],
-["Danna Doncel","CONTENT SPECIALIST",[1,1,1,1,1,1,1,5,5,1,1,1],"Principiante"],
-["Ximena Mendez","CONTENT SPECIALIST",[1,1,1,1,2,1,1,5,5,1,1,1],"Principiante"],
-["Angie Ocampo","CONTENT SPECIALIST",[1,1,1,1,2,1,1,5,5,1,1,1],"Principiante"],
-["Maximiliano Lapera","HD ANALYST",[4,4,4,5,4,2,2,2,1,1,1,1],"Competente"],
-["Fernanda Lima","HD ANALYST",[4,4,4,5,4,2,1,2,1,1,1,1],"Competente"],
-["Luisa Mayorga","HD ANALYST",[4,4,4,5,3,2,1,2,1,1,1,1],"Competente"],
-["Leonardo Múnera","SR PRODUCTION SPECIALIST",[1,1,1,4,3,2,4,1,1,4,4,4],"Competente"],
-["Daniela Lozano","SR PRODUCTION SPECIALIST",[5,5,5,5,5,5,5,1,1,1,1,1],"Avanzado"],
-["Sebastian Quintero","TECHNICAL SPECIALIST",[0,0,0,0,0,0,0,1,1,1,4,4],"Competente"],
-["John Lozano","TECHNICAL SPECIALIST",[2,2,2,4,5,2,4,1,1,5,4,4],"Competente"],
-["Miguel Echeverri","TECHNICAL SPECIALIST",[5,5,5,5,5,5,5,1,1,1,4,4],"Avanzado"],
+["Jonathan Consuegra","CONTENT SPECIALIST",[1,1,1,1,1,1,2,1,1,4,1,4],"Principiante"],
+["Maria Camila Martinez","CONTENT SPECIALIST",[1,1,1,1,1,1,1,2,1,1,1,1],"Sin conocimiento"],
+["Danna Doncel","CONTENT SPECIALIST",[1,1,1,1,1,1,1,4,5,1,1,1],"Principiante"],
+["Ximena Mendez","CONTENT SPECIALIST",[1,1,1,1,1,1,1,3,5,1,1,1],"Principiante"],
+["Angie Ocampo","CONTENT SPECIALIST",[1,1,1,1,1,1,1,1,1,1,1,1],"Sin conocimiento"],
+["Maximiliano Lapera","HD ANALYST",[3,1,1,5,3,1,2,2,1,0,0,0],"Principiante"],
+["Fernanda Lima","HD ANALYST",[3,1,1,5,1,1,1,2,1,0,0,0],"Sin conocimiento"],
+["Luisa Mayorga","HD ANALYST",[3,1,1,5,1,1,1,2,1,0,0,0],"Sin conocimiento"],
+["Leonardo Múnera","SR PRODUCTION SPECIALIST",[1,1,1,4,4,1,4,1,1,4,4,4],"Competente"],
+["Daniela Lozano","SR PRODUCTION SPECIALIST",[5,5,5,5,4,5,4,1,1,1,1,1],"Competente"],
+["Sebastian Quintero","TECHNICAL SPECIALIST",[5,5,5,5,5,5,5,1,1,1,4,4],"Avanzado"],
+["John Lozano","TECHNICAL SPECIALIST",[1,1,1,4,5,1,5,1,1,5,4,4],"Competente"],
+["Miguel Echeverri","TECHNICAL SPECIALIST",[5,5,5,5,4,4,4,1,1,1,4,4],"Avanzado"],
 ["Rafael Orjuela","TECHNICAL SPECIALIST",[5,5,5,5,5,5,5,1,1,3,4,4],"Experto"],
-["Manuel Narvaez","TECHNICAL SPECIALIST",[2,2,2,4,3,3,3,1,1,1,1,1],"Principiante"],
-["David Caez","TECHNICAL SPECIALIST",[5,5,5,5,4,5,3,1,1,1,1,1],"Avanzado"],
-["Lorena Montoya","TECHNICAL SPECIALIST",[3,4,4,5,4,4,2,1,1,1,1,1],"Competente"],
-["Erick Guapacha","TECHNICAL SPECIALIST",[3,2,2,3,3,3,3,1,1,0,0,0],"Competente"],
-["Roy Gonzalias","CONTENT SPECIALIST",[1,1,1,0,1,1,0,3,3,0,1,0],"Competente"],
-["Carolina Montenegro","CONTENT SPECIALIST",[1,1,1,0,1,1,0,3,3,0,1,0],"Competente"]];
+["Manuel Narvaez","TECHNICAL SPECIALIST",[2,3,3,4,3,5,3,1,1,0,0,0],"Competente"],
+["David Caez","TECHNICAL SPECIALIST",[5,5,5,5,3,5,3,1,1,1,1,1],"Competente"],
+["Lorena Montoya","TECHNICAL SPECIALIST",[1,4,4,5,3,4,1,1,1,1,1,1],"Principiante"],
+["Erick Guapacha","TECHNICAL SPECIALIST",[4,4,4,3,3,4,3,1,1,0,0,0],"Avanzado"],
+["Roy Gonzalias","CONTENT SPECIALIST",[1,1,1,1,1,1,0,4,4,0,1,0],"Avanzado"],
+["Carolina Montenegro","CONTENT SPECIALIST",[1,1,1,1,1,1,0,4,4,0,1,0],"Avanzado"]];
 const META=4, ROLES=["TECHNICAL SPECIALIST","SR PRODUCTION SPECIALIST","HD ANALYST","CONTENT SPECIALIST"];
 const ROLE_LBL={"TECHNICAL SPECIALIST":"Technical Specialist","SR PRODUCTION SPECIALIST":"Sr Production Specialist","HD ANALYST":"HD Analyst","CONTENT SPECIALIST":"Content Specialist"};
 const req=(role,i)=>role==="CONTENT SPECIALIST"?TOOLS[i].c===1:TOOLS[i].t===1;
@@ -217,11 +217,11 @@ const avg=a=>a.reduce((s,x)=>s+x,0)/a.length;
 
 // --- herramientas
 const T=TOOLS.map((t,i)=>{
-  const all=P.map(p=>p[2][i]); const elig=P.filter(p=>req(p[1],i)&&p[2][i]>0).map(p=>p[2][i]);
+  const all=P.map(p=>p[2][i]); let elig=P.filter(p=>req(p[1],i)&&p[2][i]>0).map(p=>p[2][i]); const noreq=!elig.length; if(noreq) elig=P.filter(p=>p[2][i]>0).map(p=>p[2][i]);
   const n45=all.filter(v=>v>=4).length, n5=all.filter(v=>v===5).length, a=avg(elig);
   const idx=.6*Math.min(n45/META,1)+.4*((a-1)/4);
   const st=n45>=5?"ok":n45===4?"lim":"gap";
-  return {...t,i,n45,n5,a,idx,st,gap:Math.max(0,META-n45)};
+  return {...t,i,n45,n5,a,idx,st,noreq,gap:Math.max(0,META-n45)};
 });
 // --- personas
 const PS0=P.map(([n,r,v,lab])=>{const ri=v.map((x,i)=>i).filter(i=>req(r,i)&&v[i]>0); const lv=ri.map(i=>v[i]);
@@ -240,7 +240,7 @@ const ST={ok:'<span class="pill ok">✓ Cumple</span>',lim:'<span class="pill li
 const sorted=[...T].sort((a,b)=>b.idx-a.idx);
 document.getElementById("tools").innerHTML=`<tr><th>Herramienta · Proceso</th><th>Producto</th><th>Personas nivel 4-5 (meta 4)</th><th class="num">Nivel 5</th><th class="num">% adopción</th><th class="num">Índice</th><th>Estado</th></tr>`+
 sorted.map(t=>{const w=t.n45/23*100,m=META/23*100;const col=t.st==="ok"?"var(--good)":t.st==="lim"?"var(--warn)":"var(--crit)";
- return `<tr data-tip="${t.n}: ${t.n45} personas en 4-5 · ${t.n5} expertas · faltan ${t.gap}"><td><b>${t.tl}</b><small class="proc">${t.pr}</small></td><td><span class="prod">${t.p}</span></td>
+ return `<tr data-tip="${t.n}: ${t.n45} personas en 4-5 · ${t.n5} expertas · faltan ${t.gap}"><td><b>${t.tl}</b><small class="proc">${t.pr}${t.noreq?" · no requerida por ningún rol":""}</small></td><td><span class="prod">${t.p}</span></td>
  <td><div style="display:flex;align-items:center;gap:8px"><div class="bar" style="flex:1"><div class="track"></div><div class="fill" style="width:${w}%;background:${col}"></div><div class="metaline" style="left:${m}%"></div></div><b class="num" style="width:22px">${t.n45}</b></div></td>
  <td class="num">${t.n5}</td><td class="num">${pct(t.a/5)}</td><td class="num"><b>${pct(t.idx)}</b></td><td>${ST[t.st]}</td></tr>`}).join("");
 
@@ -272,7 +272,7 @@ document.getElementById("find").innerHTML=[
 // roles
 document.getElementById("roletab").innerHTML=`<tr><th>Rol</th><th class="num">Personas</th><th class="num">Herr. requeridas</th><th>Score promedio de adopción</th><th class="num">Cobertura 4-5</th><th>Distribución</th><th>Menor dominio</th></tr>`+
 ROLES.map(r=>{const ps=PS.filter(p=>p.r===r), sc=avg(ps.map(p=>p.score)), rq=TOOLS.map((t,i)=>i).filter(i=>req(r,i));
- const weak=rq.map(i=>({i,a:avg(ps.map(p=>p.v[i]))})).sort((a,b)=>a.a-b.a).slice(0,2);
+ const weak=rq.map(i=>{const f=ps.map(p=>p.v[i]).filter(x=>x>0);return {i,a:f.length?avg(f):0}}).filter(w=>w.a>0).sort((a,b)=>a.a-b.a).slice(0,2);
  const d={ok:0,lim:0,gap:0}; ps.forEach(p=>d[band(p.score)]++);
  return `<tr><td><b>${ROLE_LBL[r]}</b></td><td class="num">${ps.length}</td><td class="num">${rq.length}</td>
  <td><div style="display:flex;align-items:center;gap:8px"><div class="bar" style="flex:1;min-width:120px"><div class="track"></div><div class="fill" style="width:${sc*100}%;background:${BCOL[band(sc)]}"></div><div class="metaline" style="left:60%"></div></div><b class="num" style="width:38px;text-align:right">${pct(sc)}</b></div></td>
