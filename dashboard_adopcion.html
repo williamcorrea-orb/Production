@@ -123,7 +123,7 @@ html{scroll-behavior:smooth} section{scroll-margin-top:60px}
 </div></nav>
 <div class="wrap">
   <header>
-    <div class="eyebrow">Producción · Matriz de adopción de soluciones tecnológicas + IA · Octubre 2026 · Datos al 28-oct · act. 5</div>
+    <div class="eyebrow">Producción · Matriz de adopción de soluciones tecnológicas + IA · Octubre 2026 · Datos al 28-oct · act. 6</div>
     <h1>Nivel de adopción de herramientas</h1>
     <p class="sub">Meta: <b>mínimo 4 personas en nivel 4 (Avanzado · Integra) o 5 (Experto · Transforma)</b> por herramienta. Escala 1 Sin conocimiento · 2 Principiante · 3 Competente · 4 Avanzado · 5 Experto.</p>
   </header>
@@ -135,7 +135,7 @@ html{scroll-behavior:smooth} section{scroll-margin-top:60px}
   </section>
 
   <section id="herramientas">
-    <div class="sechead"><span class="secn">2</span><div><h2>Adopción por herramienta vs meta</h2><p class="note">Índice ponderado = 60% cobertura experta (personas nivel 4-5 ÷ meta 4, tope 100%) + 40% nivel promedio normalizado de los roles que deben conocer la herramienta.</p></div></div>
+    <div class="sechead"><span class="secn">2</span><div><h2>Adopción por herramienta vs meta</h2><p class="note"><b>Cobertura experta</b> = personas en nivel 4-5 ÷ meta de 4 (tope 100%; el excedente se muestra aparte). <b>% adopción</b> = nivel promedio de los roles que deben conocer la herramienta ÷ 5.</p></div></div>
     <div class="panel">
       <div class="legend"><span><span class="sw" style="background:var(--meta);width:3px"></span>Meta 4 personas</span><span class="pill ok">✓ Cumple ≥5</span><span class="pill lim">▲ Al límite =4</span><span class="pill gap">✕ Brecha &lt;4</span></div>
       <div class="scroll"><table id="tools"></table></div>
@@ -220,9 +220,9 @@ const avg=a=>a.reduce((s,x)=>s+x,0)/a.length;
 const T=TOOLS.map((t,i)=>{
   const all=P.map(p=>p[2][i]); let elig=P.filter(p=>req(p[1],i)&&p[2][i]>0).map(p=>p[2][i]); const noreq=!elig.length; if(noreq) elig=P.filter(p=>p[2][i]>0).map(p=>p[2][i]);
   const n45=all.filter(v=>v>=4).length, n5=all.filter(v=>v===5).length, a=avg(elig);
-  const idx=.6*Math.min(n45/META,1)+.4*((a-1)/4);
+  const cob=Math.min(n45/META,1);
   const st=n45>=5?"ok":n45===4?"lim":"gap";
-  return {...t,i,n45,n5,a,idx,st,noreq,gap:Math.max(0,META-n45)};
+  return {...t,i,n45,n5,a,cob,st,noreq,gap:Math.max(0,META-n45)};
 });
 // --- personas
 const PS0=P.map(([n,r,v,lab])=>{const ri=v.map((x,i)=>i).filter(i=>req(r,i)&&v[i]>0); const lv=ri.map(i=>v[i]);
@@ -238,12 +238,12 @@ document.getElementById("kpis").innerHTML=k.map(([b,s],j)=>`<div class="kpi"><b 
 
 // tabla herramientas
 const ST={ok:'<span class="pill ok">✓ Cumple</span>',lim:'<span class="pill lim">▲ Al límite</span>',gap:'<span class="pill gap">✕ Brecha</span>'};
-const sorted=[...T].sort((a,b)=>b.idx-a.idx);
-document.getElementById("tools").innerHTML=`<tr><th>Herramienta · Proceso</th><th>Producto</th><th>Personas nivel 4-5 (meta 4)</th><th class="num">Nivel 5</th><th class="num">% adopción</th><th class="num">Índice</th><th>Estado</th></tr>`+
+const sorted=[...T].sort((a,b)=>b.n45-a.n45||b.a-a.a);
+document.getElementById("tools").innerHTML=`<tr><th>Herramienta · Proceso</th><th>Producto</th><th>Personas nivel 4-5 (meta 4)</th><th class="num">Nivel 5</th><th class="num">% adopción</th><th class="num">Cobertura experta</th><th>Estado</th></tr>`+
 sorted.map(t=>{const w=t.n45/23*100,m=META/23*100;const col=t.st==="ok"?"var(--good)":t.st==="lim"?"var(--warn)":"var(--crit)";
  return `<tr data-tip="${t.n}: ${t.n45} personas en 4-5 · ${t.n5} expertas · faltan ${t.gap}"><td><b>${t.tl}</b><small class="proc">${t.pr}${t.noreq?" · no requerida por ningún rol":""}</small></td><td><span class="prod">${t.p}</span></td>
  <td><div style="display:flex;align-items:center;gap:8px"><div class="bar" style="flex:1"><div class="track"></div><div class="fill" style="width:${w}%;background:${col}"></div><div class="metaline" style="left:${m}%"></div></div><b class="num" style="width:22px">${t.n45}</b></div></td>
- <td class="num">${t.n5}</td><td class="num">${pct(t.a/5)}</td><td class="num"><b>${pct(t.idx)}</b></td><td>${ST[t.st]}</td></tr>`}).join("");
+ <td class="num">${t.n5}</td><td class="num">${pct(t.a/5)}</td><td class="num"><b>${pct(t.cob)}</b><small class="proc">${t.n45>META?`+${t.n45-META} sobre meta`:t.n45===META?"justo en meta":`faltan ${t.gap}`}</small></td><td>${ST[t.st]}</td></tr>`}).join("");
 
 // consolidado por herramienta
 const UT=[...new Set(TOOLS.map(t=>t.tl))];
